@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Annonce;
 use App\Entity\Question;
+use App\Entity\Utilisateur;
 use App\Repository\AnnonceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
@@ -50,9 +51,10 @@ class AnnoncesController extends AbstractController
             ->setTitle($request->request->get("title"))
             ->setDescription($request->request->get("desc"))
             ->setPrice($request->request->get("price"))
-            ->setAuthor(103)
+            ->setAuthor()
             ->setPhotos(["pasdurl","toujourspas"])
-            ->setCreatedAt(new \DateTime());
+            ->setCreatedAt(new \DateTime())
+            ->setSlug(strtolower(str_replace(" ","-",$request->request->get("title"))));
 
         $entityManager->persist($newAnnonce);
         $entityManager->flush();

@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-<form action="{{ path('app_add_annonce_form') }}" method="post" enctype="multipart/form-data">
-    <input type="text" name="title" placeholder="Titre"/><br/>
-    <input type="text" name="desc" placeholder="Description"/><br/>
-    <input type="number" name="price" placeholder="Prix"/><br/>
-    <input type="file" name="photos" placeholder="photos"/><br/>
-    <input type="submit" value="Ajouter une annonce"/>
-</form>
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/style/addAnnonceStyle.css">
+{% endblock %}
+
+{% block main %}
+    <form class="form_add_annonce" action="{{ path('app_add_annonce_form') }}" method="post">
+        <input type="text" name="title" placeholder="Titre"/><br/>
+        <input type="text" name="desc" placeholder="Description"/><br/>
+        <input type="number" name="price" placeholder="Prix"/><br/>
+        <input type="file" name="photos" placeholder="photos"/><br/>
+        <input type="submit" value="Publier votre annonce"/>
+    </form>
 {% endblock %}

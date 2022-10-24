@@ -147,8 +147,10 @@ class Annonce
     /**
      * @param string|null $slug
      */
-    public function setSlug(?string $slug): void
+    public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
     }
 }
