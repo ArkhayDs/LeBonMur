@@ -1,0 +1,14 @@
+Class:
+- utilisateur : { nom, password, email, annonces, type -vendeurs,acheteurs,admins}
+- annonces : { photos, titre, desc, prix, datepublish }
+- questions : { utilisateurs, name, slug, reponses, datepublish }
+- reponses : { utilisateurs, question, text, datepublish }
+
+Relation :
+- 1toMany : user > annonces
+- Manyto1 : annonces > user
+
+- tags pour annonces
+
+- up-vote/ down-vote system pour vendeurs
+- search system

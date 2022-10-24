@@ -1,0 +1,21 @@
+.post_announce {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post_announce a{
+    background-color: #27E8ED;
+    color: #ffffff;
+    border: none;
+    margin: 10px 5px;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 25px;
+    transition: .5s;
+}
+
+.post_announce a:hover{
+    cursor: pointer;
+    background-color: #0DA0A8;
+    color: #ffffff;
+}

@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Le Bon Mur{% endblock %}</title>
+    <link rel="icon" href="/assets/logo-leBonMur.svg">
+    <link rel="stylesheet" href="/style/style.css">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<header>
+    {% block header %}
+        <nav>
+            <a href="http://localhost:5555/"><img src="/assets/logo-text-leBonMur.svg"></a>
+            <div class="header_link">
+                <div class="header_over_link">
+                    <a href="http://localhost:5555/">Acceuil</a>
+                    <a href="http://localhost:5555/annonces/add">Poster</a>
+                    <form>
+                        <input type="text">
+                    </form>
+                </div>
+                <div class="header_profile_link">
+                    <a href="http://localhost:5555/profil">
+                        <img src="/assets/profil-user.svg">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    {% endblock %}
+</header>
+<main>
+    <div class="main_container">
+        {% block main %}{% endblock %}
+    </div>
+</main>
+</body>
 </html>

@@ -1,0 +1,16 @@
+.form_add_annonce {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.form_add_annonce input{
+    width: 70%;
+    height: 100%;
+    border-radius: 50px;
+    padding: 10px 15px;
+    border: none;
+}
