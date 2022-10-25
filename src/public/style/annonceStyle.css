@@ -1,105 +1,60 @@
-
-.annonces_container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
-    width: 1000px;
-}
-
-.img_annonce {
-    width: 100%;
-    height: 400px;
-    background-position: center;
-    background-size: cover;
-    border-radius: 15px;
-    box-shadow: -5px -5px 0 3px #F5EE9E, 6px 6px 0 0 #FFD400;
-}
-
-.annonce_card_infos {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-/*style id card*/
-
-.annonce_card_id {
-    width: 90vw;
-    padding: 10px;
-}
-
-.img_annonce_id {
-    width: 100%;
-    height: 400px;
-    background-position: center;
-    background-size: cover;
-
-}
-
-.filterContainer {
-    display: grid;
-    grid-template-columns: 1fr .1fr;
-    margin: 50px 0;
-}
-
-.filterForm {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.filterForm ul{
-    list-style-type: none;
-}
-
-.filterForm ul li{
-    flex: 1 1 auto;
-    text-align: center;
-    position: relative;
-}
-
-.filterForm a{
+main {
     display: block;
-    text-decoration: none;
-    color: black;
-    border-bottom: 2px solid transparent;
-    padding: 10px 0px;
+    margin-top: 80px;
 }
 
-.filterForm a:hover{
-    color: #FFD400;
-    border-bottom: 2px solid #F5EE9E;
+header {
+    top: 0;
 }
 
-.sous {
-    display: none;
-    box-shadow: 0 1px 2px #CCC;
-    background-color: white;
-    position: absolute;
-    z-index: 1000;
+p, h1, h2, figure, .main_container {
     margin: 0;
-    padding: 5px;
-    border-radius: 5px;
 }
-.deroulant:hover .sous{
+
+.main_container {
     display: flex;
-    flex-flow: column wrap;
+    justify-content: center;
 }
-.sous li{
-    flex: 1 1 auto;
-    text-align: left;
+
+.info {
+    max-width: 1000px;
+    width: 100%;
+    margin-top: 30px;
 }
-.sous a{
-    padding: 10px;
-    border-bottom: none;
+
+.container_image {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
-.sous a:hover{
-    border-bottom: none;
-    background-color: RGBa(200,200,200,0.1);
+
+figure {
+    height: 300px;
 }
-.deroulant > a::after{
-    content:" ▼";
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.price {
+    padding-top: 10px;
     font-size: 12px;
+    font-weight: bold;
+}
+
+.date {
+    padding-top: 10px;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+h2 {
+    padding-top: 20px;
+}
+
+.description {
+    padding-top: 10px;
+    font-weight: 300;
 }

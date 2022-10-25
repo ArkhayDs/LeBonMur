@@ -59,6 +59,25 @@ class AnnoncesController extends AbstractController
         return $this->redirectToRoute("app_index");
     }
 
+/**
+     * @return Response
+     */
+    #[Route('annonce/{id}', name:'app_add_annonce', methods: ['GET'])]
+    public function annonceById(AnnonceRepository $annonceRepository, $id): Response
+    {
+        $annonce = $annonceRepository->findAllPublishedById($id);
+        
+        if (sizeof($annonce) === 1) {
+            return $this->render('annonces/annonceById.html.twig', [
+                'annonce' => $annonce[0]
+            ]);
+        } else {
+            return $this->redirectToRoute('app_index');
+        }
+    }
+
+
+
     /**
      * @throws ORMException
      * @return Response
