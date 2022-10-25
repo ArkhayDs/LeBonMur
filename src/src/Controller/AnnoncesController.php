@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnnoncesController extends AbstractController
 {
     /**
-     * @param AnnonceRepository $annonceRepository
      * @return Response
      */
     #[Route('/annonces',name:'app_annonces')]
@@ -30,7 +29,7 @@ class AnnoncesController extends AbstractController
     /**
      * @return Response
      */
-    #[Route('annonces/add', name:'app_add_annonce')]
+    #[Route('/annonces/add', name:'app_annonce_add')]
     public function addAnnonce(): Response
     {
         return $this->render('annonces/addAnnonce.html.twig');
@@ -41,7 +40,7 @@ class AnnoncesController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('annonces/handle-form', name:'app_add_annonce_form', methods: ['POST'])]
+    #[Route('/annonces/handle-form', name:'app_annonce_add_form', methods: ['POST'])]
     public function annonceFormHandler(Request $request, EntityManagerInterface $entityManager): Response
     {
         $newAnnonce = (new Annonce())
@@ -59,6 +58,25 @@ class AnnoncesController extends AbstractController
         return $this->redirectToRoute("app_index");
     }
 
+/**
+     * @return Response
+     */
+    #[Route('/annonces/{id}', name:'app_annonce_id', methods: ['GET'])]
+    public function annonceById(AnnonceRepository $annonceRepository, $id): Response
+    {
+        $annonce = $annonceRepository->findAllPublishedById($id);
+        
+        if (sizeof($annonce) === 1) {
+            return $this->render('annonces/annonceById.html.twig', [
+                'annonce' => $annonce[0]
+            ]);
+        } else {
+            return $this->redirectToRoute('app_index');
+        }
+    }
+
+
+
     /**
      * @throws ORMException
      * @return Response
@@ -72,22 +90,5 @@ class AnnoncesController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute("app_index");
-    }
-
-    /**
-     * @return Response
-     */
-    #[Route('annonces/{id}', name:'app_add_annonce', methods: ['GET'])]
-    public function annonceById(AnnonceRepository $annonceRepository, $id): Response
-    {
-        $annonce = $annonceRepository->findAllPublishedById($id);
-
-        if (sizeof($annonce) === 1) {
-            return $this->render('annonces/annonceById.html.twig', [
-                'annonce' => $annonce[0]
-            ]);
-        } else {
-            return $this->redirectToRoute('app_index');
-        }
     }
 }
