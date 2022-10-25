@@ -7,10 +7,22 @@
 
 {% block main %}
     <form class="form_add_annonce" action="{{ path('app_add_annonce_form') }}" method="post">
-        <input type="text" name="title" placeholder="Titre"/><br/>
-        <input type="text" name="desc" placeholder="Description"/><br/>
-        <input type="number" name="price" placeholder="Prix"/><br/>
-        <input type="file" name="photos" placeholder="photos"/><br/>
-        <input type="submit" value="Publier votre annonce"/>
+        <div class="input_container">
+            <input type="text" id="titre" class="input_input" placeholder=" ">
+            <label for="titre"  class="input_label">Titre</label>
+        </div>
+        <div class="input_container">
+            <input type="text" id="description" class="input_input" placeholder=" ">
+            <label for="description"  class="input_label">Description</label>
+        </div>
+        <div class="input_container">
+            <input type="number" id="prix" class="input_input" placeholder=" ">
+            <label for="prix"  class="input_label">Prix</label>
+        </div>
+        <div class="input_container file_contaienr">
+            <input type="file" name="file" id="file" class="inputfile" />
+            <label class="buttonCharge" for="file"><p class="buttonChargeText">Choisis des photos</p></label>
+        </div>
+        <input class="buttonHover" type="submit" value="Publier votre annonce"/>
     </form>
 {% endblock %}

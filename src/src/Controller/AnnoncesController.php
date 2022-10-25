@@ -16,15 +16,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnnoncesController extends AbstractController
 {
     /**
-     * @param AnnonceRepository $annonceRepository
      * @return Response
      */
     #[Route('/',name:'app_index')]
-    public function index(AnnonceRepository $annonceRepository) : Response
+    public function index() : Response
+    {
+        return $this->render('home/index.html.twig');
+    }
+
+    /**
+     * @param AnnonceRepository $annonceRepository
+     * @return Response
+     */
+    #[Route('/annonces',name:'app_annonces')]
+    public function showAnnonces(AnnonceRepository $annonceRepository) : Response
     {
         $annonces = $annonceRepository->findAllPublished();
 
-        return $this->render('home/index.html.twig');
+        return $this->render('annonces/index.html.twig', [
+            "annonces" => $annonces
+        ]);
     }
 
     /**

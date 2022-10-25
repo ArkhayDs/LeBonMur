@@ -87,12 +87,13 @@ header nav {
     align-items: center;
 }
 
-.search_form {
+.input_container {
     position: relative;
     width: 20rem;
     height: 3rem;
+    margin-top: 15px;
 }
-.search_input {
+.input_input {
     position: absolute;
     top: 0;
     left: 0;
@@ -103,15 +104,14 @@ header nav {
     font-family: inherit;
     font-size: inherit;
     outline: none;
-    padding: 0 15px;
 }
-.search_input:hover {
+.input_input:hover {
     border-color: #FFD400;
 }
-.search_input:focus {
+.input_input:focus {
     border-color: #FFD400;
 }
-.search_label {
+.input_label {
     position: absolute;
     left: 1rem;
     top: 1rem;
@@ -123,18 +123,27 @@ header nav {
     background: none;
 }
 
+.input_input:not(:placeholder-shown).input_input:not(:focus) + .input_label {
+    top: -.8rem;
+    font-size: 0.8rem;
+    left: 1.3rem;
+    padding: 0 5px;
+    border: 2px black solid;
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+}
 
-.search_input:focus ~ .search_label,
-.search_input:not(:placeholder-shown).search_input:not(:focus) ~ .search_label {
-    top: -0.5rem;
+.input_input:hover + .input_label, .input_input:focus + .input_label {
+    top: -.8rem;
     font-size: 0.8rem;
     left: 1.3rem;
     padding: 0 5px;
     border: 2px #FFD400 solid;
     background-color: #FFD400;
     border-radius: 5px;
+    color: black;
 }
-
 
 
 .buttonHover {
@@ -212,7 +221,6 @@ header nav {
 .buttonCharge:hover::before {
     transform: scaleY(1);
     border-radius: 0;
-
 }
 .buttonCharge:hover {
     border-radius: 0;
