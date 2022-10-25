@@ -1,7 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ page_name }}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/style/annonceStyle.css">
+{% endblock %}
 
 {% block main %}
     <h1>Vous êtes sur {{ page_name }}</h1>
+    <div class="annonce_card_id">
+        <div class="img_annonce_id" style="background-image: url('https://images.caradisiac.com/logos/3/7/7/6/273776/S7-essai-moto-guzzi-v100-s-la-jeunesse-centenaire-198620.jpg')"></div>
+        <h2>Supra moto trop belle</h2>
+        <p>supra description de la supra moto car on aime trop faire ça !</p>
+        <div class="annonce_card_infos">
+            <div>
+                <p>15.99€</p>
+                <p>Raphael Da.</p>
+            </div>
+            <div>
+                <a href="http://localhost:5555/annonces/1">Voir plus</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

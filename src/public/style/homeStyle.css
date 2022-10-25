@@ -1,21 +1,36 @@
-.post_announce {
-    display: flex;
+
+
+.acceuil_banner {
+    width: 100vw;
+    height: 50vh;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
     justify-content: center;
     align-items: center;
 }
-.post_announce a{
-    background-color: #27E8ED;
-    color: #ffffff;
-    border: none;
-    margin: 10px 5px;
-    padding: 15px 30px;
-    border-radius: 5px;
-    font-size: 25px;
-    transition: .5s;
+.banner_image_container {
+    width: 800px;
+    height: 950px;
+    transform: rotate(-30deg);
+    position: absolute;
+    top: -300px;
+    right: -50px;
+    overflow: hidden;
+    box-shadow: -8px -6px 0 0 #F5EE9E, -20px 6px 0 0 #FFD400;
+}
+.banner_image {
+    transform: rotate(30deg) translate(-20%, 30%);
+    width: 130%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+
 }
 
-.post_announce a:hover{
-    cursor: pointer;
-    background-color: #0DA0A8;
-    color: #ffffff;
+.post_announce {
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
