@@ -1,12 +1,23 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Mustica Pro', sans-serif;
+    font-family: 'Comfortaa', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     line-height: 21px;
     color: #1f1f1f;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_container {
+    margin-top: 80px;
+    position: relative;
 }
 
 li {
@@ -20,20 +31,6 @@ a {
     text-decoration: none;
 }
 
-button {
-    background-color: #0DA0A8;
-    border: none;
-    margin: 10px 5px;
-    padding: 15px 30px;
-    border-radius: 5px;
-    font-size: 25px;
-}
-
-button:hover {
-    cursor: pointer;
-    background-color: #27E8ED;
-}
-
 header {
     border-bottom: 1px solid #1f1f1f;
     color: #1f1f1f;
@@ -42,11 +39,24 @@ header {
     padding: 10px;
     justify-content: center;
     align-items: center;
+
+    position: fixed;
+    width: 100vw;
+    z-index: 100;
+    height: 60px;
+    background: white;
 }
 
 header nav a > img {
-    height: 30px;
+    height: 50px;
 }
+
+header nav a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 
 header nav {
@@ -63,25 +73,6 @@ header nav {
     width: 100%;
 }
 
-.header_link form {
-    width: 300px;
-}
-
-.header_link input {
-    width: 100%;
-    height: 100%;
-    border-radius: 50px;
-    padding: 10px 15px;
-    border: 1px solid #1f1f1f;
-    transition: .5s;
-}
-.header_link input:focus {
-    border: #0DA0A8 solid 1px!important;
-}
-.header_link input:hover {
-    border: #0DA0A8 solid 1px;
-}
-
 .header_over_link {
     display: flex;
     flex-direction: row;
@@ -96,19 +87,144 @@ header nav {
     align-items: center;
 }
 
-.header_profile_link a img {
-    width: 30px;
-    height: 30px;
+.search_form {
+    position: relative;
+    width: 20rem;
+    height: 3rem;
+}
+.search_input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px black solid;
+    border-radius: 15px;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    padding: 0 15px;
+}
+.search_input:hover {
+    border-color: #FFD400;
+}
+.search_input:focus {
+    border-color: #FFD400;
+}
+.search_label {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    padding: 0 0.5rem;
+    color: black;
+    /*color: #FFD400;*/
+    cursor: text;
+    transition: top 0.2s ease-in, left 0.2s ease-in, font-size 0.2s ease-in;
+    background: none;
 }
 
-header nav input:active {
-    border: 1px solid #0DA0A8;
+
+.search_input:focus ~ .search_label,
+.search_input:not(:placeholder-shown).search_input:not(:focus) ~ .search_label {
+    top: -0.5rem;
+    font-size: 0.8rem;
+    left: 1.3rem;
+    padding: 0 5px;
+    border: 2px #FFD400 solid;
+    background-color: #FFD400;
+    border-radius: 5px;
 }
 
 
-main {
-    width: 100vw;
+
+.buttonHover {
+    background-color: #F5EE9E;
+    color: black;
+    border: none;
+    margin: 10px 5px;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: .5s;
+    box-shadow: 6px 6px 0 0 #FFD400;
+}
+
+.buttonHover:hover {
+    cursor: pointer;
+    background-color: #FFD400;
+    box-shadow: -6px -6px 0 0 #F5EE9E;
+}
+
+
+
+.hoverLink:before {
+    transform: scaleX(0);
+    transform-origin: bottom right;
+}
+
+.hoverLink:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.hoverLink::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; right: 0;
+    inset: 0 0 0 0;
+    background: #FFD400;
+    z-index: -1;
+    transition: transform .3s ease;
+}
+
+.hoverLink {
+    position: relative;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.buttonCharge {
     display: flex;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    background-color: #F5EE9E;
+    cursor: pointer;
+    border-radius: 5px;
     justify-content: center;
     align-items: center;
+}
+.buttonCharge:before {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    content: "";
+    height: 100%;
+    width: 100%;
+    display: block;
+    background-color: #FFD400;
+    transform-origin: 0 bottom 0;
+    transform: scaleY(0);
+    transition: .3s ease-out;
+    border-radius: 5px;
+}
+.buttonCharge:hover::before {
+    transform: scaleY(1);
+    border-radius: 0;
+
+}
+.buttonCharge:hover {
+    border-radius: 0;
+}
+
+.buttonChargeText {
+    position: relative;
+    font-size: 15px;
+    font-weight: 500;
+    transition: .3s ease-out;
+}
+
+.buttonCharge:hover .buttonChargeText {
+    color: #FFF;
 }

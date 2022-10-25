@@ -18,18 +18,20 @@
 <header>
     {% block header %}
         <nav>
-            <a href="http://localhost:5555/"><img src="/assets/logo-text-leBonMur.svg"></a>
+            <a href="http://localhost:5555/"><img src="/assets/LeBonMur-Logo-black.svg"></a>
             <div class="header_link">
                 <div class="header_over_link">
-                    <a href="http://localhost:5555/">Acceuil</a>
-                    <a href="http://localhost:5555/annonces/add">Poster</a>
-                    <form>
-                        <input type="text">
+                    <a class="hoverLink" href="http://localhost:5555/">Acceuil</a>
+                    <a class="hoverLink" href="http://localhost:5555/annonces">Annonces</a>
+                    <a class="hoverLink" href="http://localhost:5555/annonces/add">Poster</a>
+                    <form class="search_form">
+                        <input type="search" id="1" class="search_input" placeholder=" ">
+                        <label for="1"  class="search_label">Recherche</label>
                     </form>
                 </div>
                 <div class="header_profile_link">
-                    <a href="http://localhost:5555/profil">
-                        <img src="/assets/profil-user.svg">
+                    <a class="buttonHover"  href="http://localhost:5555/profil">
+                        Se connecter
                     </a>
                 </div>
             </div>

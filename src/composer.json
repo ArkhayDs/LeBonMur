@@ -24,7 +24,8 @@
         "symfony/runtime": "6.1.*",
         "symfony/security-bundle": "6.1.*",
         "symfony/yaml": "6.1.*",
-        "zenstruck/foundry": "^1.22"
+        "zenstruck/foundry": "^1.22",
+      "ext-http": "*"
     },
     "config": {
         "allow-plugins": {

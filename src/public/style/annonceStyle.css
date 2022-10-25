@@ -1,0 +1,105 @@
+
+.annonces_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    width: 1000px;
+}
+
+.img_annonce {
+    width: 100%;
+    height: 400px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 15px;
+    box-shadow: -5px -5px 0 3px #F5EE9E, 6px 6px 0 0 #FFD400;
+}
+
+.annonce_card_infos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/*style id card*/
+
+.annonce_card_id {
+    width: 90vw;
+    padding: 10px;
+}
+
+.img_annonce_id {
+    width: 100%;
+    height: 400px;
+    background-position: center;
+    background-size: cover;
+
+}
+
+.filterContainer {
+    display: grid;
+    grid-template-columns: 1fr .1fr;
+    margin: 50px 0;
+}
+
+.filterForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.filterForm ul{
+    list-style-type: none;
+}
+
+.filterForm ul li{
+    flex: 1 1 auto;
+    text-align: center;
+    position: relative;
+}
+
+.filterForm a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid transparent;
+    padding: 10px 0px;
+}
+
+.filterForm a:hover{
+    color: #FFD400;
+    border-bottom: 2px solid #F5EE9E;
+}
+
+.sous {
+    display: none;
+    box-shadow: 0 1px 2px #CCC;
+    background-color: white;
+    position: absolute;
+    z-index: 1000;
+    margin: 0;
+    padding: 5px;
+    border-radius: 5px;
+}
+.deroulant:hover .sous{
+    display: flex;
+    flex-flow: column wrap;
+}
+.sous li{
+    flex: 1 1 auto;
+    text-align: left;
+}
+.sous a{
+    padding: 10px;
+    border-bottom: none;
+}
+.sous a:hover{
+    border-bottom: none;
+    background-color: RGBa(200,200,200,0.1);
+}
+.deroulant > a::after{
+    content:" ▼";
+    font-size: 12px;
+}

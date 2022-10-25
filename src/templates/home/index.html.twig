@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/style/homeStyle.css">
+{% endblock %}
+
+{% block main %}
+    <div class="acceuil_banner">
+        <div class="post_announce">
+            <h1>Bienvenue sur Le Bon Mur</h1>
+            <p>Des objets plus utilisés, vennez leur donner une nouvelle vie !</p>
+            <br/>
+            <br/>
+            <a class="buttonHover" href="http://localhost:5555/annonces/add">Poster une annonce</a>
+        </div>
+        <div class="banner_image_container">
+            <div class="banner_image" style="background-image: url('https://www.carrelage-bordeaux.com/wp-content/uploads/2021/04/amb-good-vives-03.jpg')"></div>
+        </div>
+    </div>
+    <div>
+    </div>
+{% endblock %}

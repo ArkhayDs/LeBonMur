@@ -55,6 +55,10 @@ final class UtilisateurFactory extends ModelFactory
              ->afterInstantiate(function(Utilisateur $utilisateur): void {
                  $utilisateur->setEmail(strtolower(sprintf("%s@gmail.com",str_replace(" ",".",$utilisateur->getName()))));
                  $utilisateur->setPassword($this->userPasswordHasher->hashPassword($utilisateur, 'password'));
+                 $rand = rand(1,10);
+                 if ($rand > 5) {
+                     $utilisateur->setRoles(['ROLE_ADMIN']);
+                 }
              })
         ;
     }
