@@ -128,7 +128,10 @@ class Annonce
         return $this;
     }
 
-    public function getQuestions(): ?Question
+    /**
+     * @return Collection|null
+     */
+    public function getQuestions(): ?Collection
     {
         return $this->questions;
     }
