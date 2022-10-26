@@ -34,7 +34,6 @@ class BaseController extends AbstractController
     }
 
     #[Route('/admin',name:'app_admin')]
-//    #[IsGranted('ROLE_ADMIN')] // valable, tout comme la gestion depuis access_control de security.yaml. A la préférence du dev pour l'organisation du code.
     public function adminPage(DemoService $demoService)
     {
 //        $this->denyAccessUnlessGranted('ROLE_ADMIN'); // valable, mais on a encore mieux !

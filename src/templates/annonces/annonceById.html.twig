@@ -33,6 +33,20 @@
 
         <h2>Description</h2>
         <p class="description">{{ annonce.description }}</p>
+
+        <br />
+        <div>
+            {% for question in annonce.questions %}
+                <p>Question : {{ question.content }}</p>
+                
+
+                {% for reponse in question.reponses %}
+                    <p>Réponse : {{ reponse.content }}</p>
+
+                {% endfor %}
+            <br />
+            {% endfor %}
+        </div>
     </section>
 
 {% endblock %}
