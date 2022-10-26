@@ -13,10 +13,10 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 80px;
 }
 
 .main_container {
-    margin-top: 80px;
     position: relative;
 }
 
@@ -32,6 +32,7 @@ a {
 }
 
 header {
+    top:0;
     border-bottom: 1px solid #1f1f1f;
     color: #1f1f1f;
     display: flex;
@@ -87,6 +88,11 @@ header nav {
     align-items: center;
 }
 
+.input_search {
+    position: relative;
+    width: 20rem;
+    height: 3rem;
+}
 .input_container {
     position: relative;
     width: 20rem;
