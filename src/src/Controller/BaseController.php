@@ -5,16 +5,26 @@ namespace App\Controller;
 use App\Service\DemoService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 // #[IsGranted('ROLE_XXX')] -> on peut faire un admin Controller avec une gestion d'accès globale sur la classe entière
 // Il reste mieux de faire de la gestion d'accès directement dans les routes
 class BaseController extends AbstractController
 {
+    /**
+     * @return Response
+     */
+    #[Route('/',name:'app_index')]
+    public function index() : Response
+    {
+        return $this->render('home/index.html.twig');
+    }
+
     #[Route('/login',name:'app_login')]
     public function login()
     {
-        return $this->render("login.html.twig");
+        return $this->render("utilisateurs/login.html.twig");
     }
 
     #[Route('/logout',name:'app_logout')]
