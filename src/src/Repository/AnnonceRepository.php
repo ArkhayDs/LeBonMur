@@ -62,4 +62,35 @@ class AnnonceRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return array
+     */
+    public function findAllAndJoin(): array
+    {
+        return $this->createQueryBuilder("a")
+            ->innerJoin("a.questions","q")
+            ->innerJoin("q.reponses","r")
+            ->addSelect("q")
+            ->addSelect("r")
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function findByIdAndJoin($id): array
+    {
+        return $this->createQueryBuilder("a")
+            ->andWhere("a.id =:value")
+            ->setParameter("value",$id)
+            ->innerJoin("a.questions","q")
+            ->innerJoin("q.reponses","r")
+            ->addSelect("q")
+            ->addSelect("r")
+            ->getQuery()
+            ->getResult();
+    }
 }
