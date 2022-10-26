@@ -40,10 +40,12 @@ final class AnnonceFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'title' => self::faker()->realText(255),
+            'title' => self::faker()->realText(40),
             'description' => self::faker()->realText(255),
             'price' => self::faker()->randomNumber(),
             'photos' => [],
+            'author' => UtilisateurFactory::random(),
+            'categories' => CategoriesFactory::randomRange(1,2),
             'createdAt' => self::faker()->dateTimeBetween("-100 days","-1 second"), // TODO add DATETIME ORM type manually
         ];
     }

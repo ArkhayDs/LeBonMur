@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Utilisateur;
 use Symfony\Component\Security\Core\Security;
 
 class DemoService
@@ -13,7 +14,7 @@ class DemoService
         $this->security = $security;
     }
 
-    public function demoMethod(User $user)
+    public function demoMethod(Utilisateur $user)
     {
         dump($this->security->getUser());
     }

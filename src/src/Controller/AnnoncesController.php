@@ -64,9 +64,9 @@ class AnnoncesController extends AbstractController
     #[Route('/annonces/{id}', name:'app_annonce_id', methods: ['GET'])]
     public function annonceById(AnnonceRepository $annonceRepository, $id): Response
     {
-        $annonce = $annonceRepository->findAllPublishedById($id);
+        $annonce = $annonceRepository->findByIdAndJoin($id);
         $tempo = [1,1,1];
-        
+
         if (sizeof($annonce) === 1) {
             return $this->render('annonces/annonceById.html.twig', [
                 'annonce' => $annonce[0],
