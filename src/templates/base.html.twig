@@ -26,18 +26,18 @@
                     <a class="hoverLink" href="http://localhost:5555/annonces/add">Poster</a>
                     <form class="input_search">
                         <input type="search" id="search" class="input_input" placeholder=" ">
-                        <label for="search"  class="input_label">Recherche</label>
+                        <label for="search" class="input_label">Recherche</label>
                     </form>
                 </div>
                 <div class="header_profile_link">
                     {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                        <a class="buttonHover"  href="http://localhost:5555/profil">
+                        <a class="buttonHover" href="http://localhost:5555/profil">
                             Profil
                         </a>
                     {% else %}
-                    <a class="buttonHover"  href="http://localhost:5555/login">
-                        Se connecter
-                    </a>
+                        <a class="buttonHover" href="http://localhost:5555/login">
+                            Se connecter
+                        </a>
                     {% endif %}
                 </div>
             </div>
@@ -45,11 +45,15 @@
     {% endblock %}
 </header>
 <main>
-    <div class="pub_banner_left pub_banner" style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a class="pub_banner" href="http://localhost:5555/pub/surprise/pour/jf"> </a></div>
+    <div class="pub_banner_left pub_banner"
+         style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a
+                class="pub_banner" href="http://localhost:5555/pub/surprise/pour/jf"> </a></div>
     <div class="main_container">
         {% block main %}{% endblock %}
     </div>
-    <div class="pub_banner_right pub_banner" style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a class="pub_banner" href="http://localhost:5555/pub/surprise/pour/jf"></a></div>
+    <div class="pub_banner_right pub_banner"
+         style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a
+                class="pub_banner" href="http://localhost:5555/pub/surprise/pour/jf"></a></div>
 </main>
 </body>
 </html>
