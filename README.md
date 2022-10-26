@@ -1,25 +1,24 @@
 # Php-fpm-alpine x Nginx
 ### Symfony | Docker
 
-Avec MariaDB & MailDev
+## PREMIERE INSTALLATION DU PROJET - COMMANDES BASH SYMFONY :
 
-Pour lancer le projet :
+Se rendre dans le container Symfony :
 ````shell
-docker-compose up -d
-docker exec symfony_docker composer create-project symfony/skeleton html
-sudo chown -R $USER ./
+docker exec -ti {id_container} bash
 ````
 
-Pensez ensuite à aller exécuter toutes vos commandes depuis l'intérieur du container.
-
-Par exemple :
+Après être allé dans le dossier /html et avoir fait le composer install, créer la db :
 ````shell
-cd symfony_project
-composer require orm
+symfony console d:d:c
 ````
-(Demandez à Composer de NE PAS créer une config Docker pour la database)
 
-Enfin, modifiez la config DB dans le fichier .env de Symfony :
+Effectuer la migration déjà préparée :
 ````shell
-DATABASE_URL=mysql://root:ChangeMeLater@db:3306/symfony_db?serverVersion=mariadb-10.7.1
+symfony console d:m:m
+````
+
+Créer la data fictive depuis les fixtures :
+````shell
+symfony console d:f:l
 ````
