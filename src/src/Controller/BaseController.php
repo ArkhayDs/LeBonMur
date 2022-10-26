@@ -46,4 +46,10 @@ class BaseController extends AbstractController
             "utilisateur" => $utilisateur
         ]);
     }
+
+    #[Route('/pub/surprise/pour/jf',name:'app_pub')]
+    public function pubRedirect()
+    {
+        return $this->redirect("https://www.triumphmotorcycles.fr/configure/bike/b80c9f60-7dc7-4b21-b00c-d008cbbe913e/configure#config");
+    }
 }
