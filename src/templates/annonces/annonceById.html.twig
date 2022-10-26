@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ annonce.title }}{% endblock %}
+{% block title %}{{ annonce.title }} - Le Bon Mur{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="/style/annonceStyle.css">
+    <link rel="stylesheet" href="/style/annonceById.css">
 {% endblock %}
 
 {% block main %}
@@ -14,7 +14,7 @@
             </figure>
         </div>
         <h1>{{ annonce.title }}</h1>
-        <p class="price">{{ annonce.price }}</p>
+        <p class="price">{{ annonce.price }} €</p>
         <p class="date">{{ annonce.createdAt|date("m/d/Y") }}</p>
 
         <h2>Description</h2>

@@ -32,13 +32,8 @@ security:
 
 
     access_control:
-<<<<<<< HEAD
         - { path: ^/login$, roles: PUBLIC_ACCESS }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
-=======
-#        - { path: ^/login$, roles: PUBLIC_ACCESS }
-#        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
->>>>>>> ece54a867262aac2b35ff85a3d53fcc3af0b9c39
 
 when@test:
     security:
