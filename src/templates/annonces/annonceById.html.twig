@@ -8,10 +8,24 @@
 
 {% block main %}
     <section class="info">
-        <div class="container_image"> 
-            <figure>
-                <img src="https://m.media-amazon.com/images/I/61+wIDiVDJL._AC_SX425_.jpg"></img>
-            </figure>
+        <div class="container_image">
+            <div class="first_image">
+                <figure>
+                    <img src="https://images.pexels.com/photos/2611686/pexels-photo-2611686.jpeg"></img>
+                </figure>
+            </div>
+            <div class="rest_image">
+                <div class="contain_image {{ tempo|length == 2 ? 'full_height' }}">
+                    <figure>
+                        <img src="https://images.pexels.com/photos/2611686/pexels-photo-2611686.jpeg"></img>
+                    </figure>
+                </div>
+                <div class="contain_image">
+                    <figure>
+                        <img src="https://images.pexels.com/photos/2611686/pexels-photo-2611686.jpeg"></img>
+                    </figure>
+                </div>
+            </div> 
         </div>
         <h1>{{ annonce.title }}</h1>
         <p class="price">{{ annonce.price }} €</p>
@@ -21,18 +35,4 @@
         <p class="description">{{ annonce.description }}</p>
     </section>
 
-    {# <div class="annonce_card_id">
-        <div class="img_annonce_id" style="background-image: url('https://images.caradisiac.com/logos/3/7/7/6/273776/S7-essai-moto-guzzi-v100-s-la-jeunesse-centenaire-198620.jpg')"></div>
-        <h2>Supra moto trop belle</h2>
-        <p>supra description de la supra moto car on aime trop faire ça !</p>
-        <div class="annonce_card_infos">
-            <div>
-                <p>15.99€</p>
-                <p>Raphael Da.</p>
-            </div>
-            <div>
-                <a href="http://localhost:5555/annonces/1">Voir plus</a>
-            </div>
-        </div>
-    </div> #}
 {% endblock %}
