@@ -8,10 +8,24 @@
 
 {% block main %}
     <section class="info">
-        <div class="container_image"> 
-            <figure>
-                <img src="https://m.media-amazon.com/images/I/61+wIDiVDJL._AC_SX425_.jpg"></img>
-            </figure>
+        <div class="container_image">
+            <div class="first_image">
+                <figure>
+                    <img src="https://m.media-amazon.com/images/I/61+wIDiVDJL._AC_SX425_.jpg"></img>
+                </figure>
+            </div>
+            <div class="rest_image">
+                <div class="contain_image {{ tempo|length == 2 ? 'full_height' }}">
+                    <figure>
+                        <img src="https://m.media-amazon.com/images/I/61+wIDiVDJL._AC_SX425_.jpg"></img>
+                    </figure>
+                </div>
+                <div class="contain_image">
+                    <figure>
+                        <img src="https://m.media-amazon.com/images/I/61+wIDiVDJL._AC_SX425_.jpg"></img>
+                    </figure>
+                </div>
+            </div> 
         </div>
         <h1>{{ annonce.title }}</h1>
         <p class="price">{{ annonce.price }} €</p>

@@ -65,10 +65,12 @@ class AnnoncesController extends AbstractController
     public function annonceById(AnnonceRepository $annonceRepository, $id): Response
     {
         $annonce = $annonceRepository->findAllPublishedById($id);
+        $tempo = [1,1,1];
         
         if (sizeof($annonce) === 1) {
             return $this->render('annonces/annonceById.html.twig', [
-                'annonce' => $annonce[0]
+                'annonce' => $annonce[0],
+                'tempo' => $tempo
             ]);
         } else {
             return $this->redirectToRoute('app_index');
