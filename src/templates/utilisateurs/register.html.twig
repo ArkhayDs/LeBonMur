@@ -7,27 +7,26 @@
 
 {% block main %}
     <div class="login_container">
-        <h2>Se connecter</h2>
+        <h2>S'inscrire</h2>
         <form method="post">
-            <br/>
+            <div class="input_container">
+                <input type="email" id="email" class="input_input" placeholder=" ">
+                <label for="email" class="input_label">Nom</label>
+            </div>
             <div class="input_container">
                 <input type="text" id="name" class="input_input" placeholder=" ">
                 <label for="name" class="input_label">Nom</label>
             </div>
-            <br/>
             <div class="input_container">
                 <input type="password" id="password" class="input_input" placeholder=" ">
                 <label for="password" class="input_label">Mot de passe</label>
             </div>
-            <br/>
             <input type="hidden" name="csrf" value="{{ csrf_token('login_form') }}">
-            <br/>
             <input class="buttonHover" type="submit" value="Connexion">
-            <br/>
 
             <p class="linkLitelFont">
-                Vous n'avez pas de compte ?
-                <a class="litelhoverLink" href="register.html.twig">S'inscrire</a>
+                Vous avez un compte ?
+                <a class="litelhoverLink" href="register.html.twig">Se connecter</a>
             </p>
         </form>
     </div>

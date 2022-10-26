@@ -14,10 +14,11 @@ main {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     margin-top: 80px;
+    overflow-x: hidden ;
 }
 
 .pub_banner {
-    min-height: 100vh;
+    min-height: 1700px;
     width: 100%;
     background-size: contain;
 }
@@ -210,6 +211,37 @@ header nav {
     position: relative;
     font-size: 18px;
     padding: 5px;
+}
+
+.litelhoverLink:after {
+    transform: scaleX(0);
+    transform-origin: bottom center;
+}
+
+.litelhoverLink:hover::after {
+    transform: scaleX(1);
+}
+
+.litelhoverLink::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    inset: 100% 0 0 0;
+    background: #FFD400;
+    height: 2px;
+    transition: transform .3s ease;
+}
+
+.litelhoverLink {
+    position: relative;
+    font-size: 10px;
+    padding: 5px;
+}
+.litelhoverLink:hover {
+    color: #FFD400;
+}
+.linkLitelFont {
+    font-size: 10px;
 }
 
 .buttonCharge {
