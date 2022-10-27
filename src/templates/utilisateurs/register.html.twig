@@ -10,23 +10,32 @@
         <h2>S'inscrire</h2>
         <form method="post">
             <div class="input_container">
-                <input type="email" id="email" class="input_input" placeholder=" ">
-                <label for="email" class="input_label">Nom</label>
+                <input type="email" id="email" name="email" class="input_input" placeholder=" ">
+                <label for="email" class="input_label">Email</label>
             </div>
+            <br />
             <div class="input_container">
-                <input type="text" id="name" class="input_input" placeholder=" ">
+                <input type="text" id="name" name="name" class="input_input" placeholder=" ">
                 <label for="name" class="input_label">Nom</label>
             </div>
+            <br />
             <div class="input_container">
-                <input type="password" id="password" class="input_input" placeholder=" ">
+                <input type="password" id="password" name="password" class="input_input" placeholder=" ">
                 <label for="password" class="input_label">Mot de passe</label>
             </div>
-            <input type="hidden" name="csrf" value="{{ csrf_token('login_form') }}">
-            <input class="buttonHover" type="submit" value="Connexion">
+            <br />
+            <div class="input_container">
+                <input type="password" id="password2" name="password2" class="input_input" placeholder=" ">
+                <label for="password2" class="input_label">Confirmez le Mot de passe</label>
+            </div>
+            <input type="hidden" name="csrf" value="{{ csrf_token('register_form') }}">
+            <br />
+            <input class="buttonHover" type="submit" value="Créer un compte">
+            <br />
 
             <p class="linkLitelFont">
                 Vous avez un compte ?
-                <a class="litelhoverLink" href="register.html.twig">Se connecter</a>
+                <a class="litelhoverLink" href="{{ path("app_login") }}">Se connecter</a>
             </p>
         </form>
     </div>

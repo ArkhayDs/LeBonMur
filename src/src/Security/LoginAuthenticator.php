@@ -2,11 +2,9 @@
 
 namespace App\Security;
 
-use App\Service\DemoService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -16,14 +14,16 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class LoginAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
 {
+    use TargetPathTrait;
     private UrlGeneratorInterface $urlGenerator;
 
     public function __construct(UrlGeneratorInterface $urlGenerator)
     {
-
         $this->urlGenerator = $urlGenerator;
     }
 
@@ -39,13 +39,18 @@ class LoginAuthenticator extends AbstractAuthenticator implements Authentication
             new UserBadge($request->request->get('name')),
             new PasswordCredentials($request->request->get('password')),
             [
-                new CsrfTokenBadge("login_form",$request->request->get('csrf'))
+                new CsrfTokenBadge("login_form",$request->request->get('csrf')),
+                new RememberMeBadge()
             ]
         );
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+            return new RedirectResponse($targetPath);
+        }
+
         return new RedirectResponse($this->urlGenerator->generate('app_index'));
     }
 
@@ -56,22 +61,6 @@ class LoginAuthenticator extends AbstractAuthenticator implements Authentication
 
     public function start(Request $request, AuthenticationException $authException = null): Response
     {
-        return new RedirectResponse($this->urlGenerator->generate('app_login'),
-            Response::HTTP_UNAUTHORIZED
-        );
-    }
-
-    #[Route('/admin',name:'app_admin')]
-//    #[IsGranted('ROLE_ADMIN')] // valable, tout comme la gestion depuis access_control de security.yaml. A la préférence du dev pour l'organisation du code.
-    public function adminPage(DemoService $demoService)
-    {
-//        $this->denyAccessUnlessGranted('ROLE_ADMIN'); // valable, mais on a encore mieux !
-        $utilisateur = $this->getUser();
-
-        $demoService->demoMethod($utilisateur);
-
-        return $this->render('admin.html.twig', [
-            "utilisateur" => $utilisateur
-        ]);
+        return new RedirectResponse($this->urlGenerator->generate('app_login'));
     }
 }

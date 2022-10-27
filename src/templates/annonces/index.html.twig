@@ -45,6 +45,10 @@
         </a>
     </div>
 
+    {% for message in app.flashes('success') %}
+        <p>Test : {{ message }}</p>
+    {% endfor %}
+
     <div>
         <div class="annonces_container">
             <div class="annonce_card">

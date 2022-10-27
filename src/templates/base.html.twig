@@ -18,12 +18,12 @@
 <header>
     {% block header %}
         <nav>
-            <a href="http://localhost:5555/"><img src="/assets/LeBonMur-Logo-black.svg"></a>
+            <a href="{{ path("app_index") }}"><img src="/assets/LeBonMur-Logo-black.svg"></a>
             <div class="header_link">
                 <div class="header_over_link">
-                    <a class="hoverLink" href="http://localhost:5555/">Acceuil</a>
-                    <a class="hoverLink" href="http://localhost:5555/annonces">Annonces</a>
-                    <a class="hoverLink" href="http://localhost:5555/annonces/add">Poster</a>
+                    <a class="hoverLink" href="{{ path("app_index") }}">Acceuil</a>
+                    <a class="hoverLink" href="{{ path("app_annonces") }}">Annonces</a>
+                    <a class="hoverLink" href="{{ path("app_annonce_add") }}">Poster</a>
                     <form class="input_search">
                         <input type="search" id="search" class="input_input" placeholder=" ">
                         <label for="search" class="input_label">Recherche</label>
@@ -31,11 +31,11 @@
                 </div>
                 <div class="header_profile_link">
                     {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                        <a class="buttonHover" href="http://localhost:5555/profil">
+                        <a class="buttonHover" href="{{ path("app_profil") }}">
                             Profil
                         </a>
                     {% else %}
-                        <a class="buttonHover" href="http://localhost:5555/login">
+                        <a class="buttonHover" href="{{ path("app_login") }}">
                             Se connecter
                         </a>
                     {% endif %}
@@ -47,13 +47,13 @@
 <main>
     <div class="pub_banner_left pub_banner"
          style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a
-                class="pub_banner" href="http://localhost:5555/pub/surprise/pour/jf"> </a></div>
+                class="pub_banner" href="{{ path("app_pub") }}"> </a></div>
     <div class="main_container">
         {% block main %}{% endblock %}
     </div>
     <div class="pub_banner_right pub_banner"
          style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a
-                class="pub_banner" href="http://localhost:5555/pub/surprise/pour/jf"></a></div>
+                class="pub_banner" href="{{ path("app_pub") }}"></a></div>
 </main>
 </body>
 </html>

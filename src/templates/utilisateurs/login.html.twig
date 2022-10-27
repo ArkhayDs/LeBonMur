@@ -23,11 +23,16 @@
             <input type="hidden" name="csrf" value="{{ csrf_token('login_form') }}">
             <br/>
             <input class="buttonHover" type="submit" value="Connexion">
+            <div>
+                <label>
+                    <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                </label>
+            </div>
             <br/>
 
             <p class="linkLitelFont">
                 Vous n'avez pas de compte ?
-                <a class="litelhoverLink" href="register.html.twig">S'inscrire</a>
+                <a class="litelhoverLink" href="{{ path( "app_register") }}">S'inscrire</a>
             </p>
         </form>
     </div>
