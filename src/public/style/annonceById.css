@@ -72,10 +72,23 @@ h1 {
 }
 
 h2 {
-    padding-top: 20px;
+    padding: 20px 0;
 }
 
 .description {
-    padding-top: 10px;
     font-weight: 300;
+}
+
+.container_block_question {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.question__block_title {
+    min-width: fit-content;
+    padding-right: 10px;
+}
+
+.content_question {
+    color: deepskyblue;
 }

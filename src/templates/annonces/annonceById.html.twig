@@ -34,14 +34,25 @@
         <h2>Description</h2>
         <p class="description">{{ annonce.description }}</p>
 
-        <br />
+        <h2>Questions</h2>
         <div>
             {% for question in annonce.questions %}
-                <p>Question : {{ question.content }}</p>
-
+                <div class="container_block_question">
+                    <p class="question__block_title">Question :</p>
+                    <p class="content_question">{{ question.content }}</p>
+                </div>
+                <form action="get" class="answer_form">
+                    <div class="contain_answer_form">
+                        <label for="content"></label>
+                        <input type="text" name="content" id="content" placeholder="Ecrivez votre réponse" required>
+                    </div>
+                </form>
 
                 {% for reponse in question.reponses %}
-                    <p>Réponse : {{ reponse.content }}</p>
+                    <div class="container_block_question">
+                        <p class="question__block_title">Réponse :</p>
+                        <p class="content_answer">{{ reponse.content }}</p>
+                    </div>
 
                 {% endfor %}
             <br />
