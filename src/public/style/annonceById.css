@@ -79,9 +79,13 @@ h2 {
     font-weight: 300;
 }
 
+.question_form {
+    padding-bottom: 10px;
+}
+
 .container_block_question {
     display: flex;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 .question__block_title {
@@ -90,5 +94,18 @@ h2 {
 }
 
 .content_question {
-    color: deepskyblue;
+    font-weight: 300;
+    color: #FFD400;
+}
+
+.content_answer {
+    font-weight: 300;
+}
+
+.content_question > p {
+    padding-bottom: 10px;
+}
+
+.button_form {
+    padding-top: 5px;
 }

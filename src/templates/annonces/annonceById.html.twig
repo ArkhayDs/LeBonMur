@@ -36,17 +36,31 @@
 
         <h2>Questions</h2>
         <div>
+            <form action="get" class="question_form">
+                <div class="contain_question_form">
+                    <label for="content"></label>
+                    <input type="text" name="content" id="content" placeholder="Ecrivez votre question" required>
+                    <div class="button_form">
+                        <input type="submit" value="Envoyer">
+                    </div>
+                </div>
+            </form>
             {% for question in annonce.questions %}
                 <div class="container_block_question">
                     <p class="question__block_title">Question :</p>
-                    <p class="content_question">{{ question.content }}</p>
-                </div>
-                <form action="get" class="answer_form">
-                    <div class="contain_answer_form">
-                        <label for="content"></label>
-                        <input type="text" name="content" id="content" placeholder="Ecrivez votre réponse" required>
+                    <div class="content_question">
+                        <p>{{ question.content }}</p>
+                        <form action="get" class="answer_form">
+                            <div class="contain_answer_form">
+                                <label for="content"></label>
+                                <input type="text" name="content" id="content" placeholder="Ecrivez votre réponse" required>
+                                <div class="button_form">
+                                    <input type="submit" value="Envoyer">
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
 
                 {% for reponse in question.reponses %}
                     <div class="container_block_question">
