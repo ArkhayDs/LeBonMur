@@ -43,15 +43,35 @@ class UtilisateurRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return User[]
+     * @return Utilisateur[]
      */
     public function findAllAndJoin() : array {
         return $this->createQueryBuilder('u')
             ->innerJoin('u.annonces','a')
-            ->addSelect("select *")
+            ->addSelect("a")
             ->getQuery()
             ->getResult();
 
+    }
+
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function findByIdAndJoin($id): array
+    {
+        return $this->createQueryBuilder("u")
+            ->andWhere("u.id =:value")
+            ->setParameter("value",$id)
+            ->innerJoin("u.annonces","a")
+            ->innerJoin("u.questions","q")
+            ->innerJoin("u.reponses","r")
+            ->addSelect("a")
+            ->addSelect("q")
+            ->addSelect("r")
+            ->getQuery()
+            ->getResult();
     }
 //    /**
 //     * @return Utilisateur[] Returns an array of Utilisateur objects

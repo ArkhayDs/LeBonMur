@@ -24,7 +24,11 @@ class BaseController extends AbstractController
     #[Route('/',name:'app_index')]
     public function index() : Response
     {
-        return $this->render('home/index.html.twig');
+        $utilisateur = $this->getUser();
+
+        return $this->render('home/index.html.twig', [
+            "utilisateur" => $utilisateur
+        ]);
     }
 
     #[Route('/login',name:'app_login')]
@@ -84,16 +88,6 @@ class BaseController extends AbstractController
         $utilisateur = $this->getUser();
 
         return $this->render('utilisateurs/admin.html.twig', [
-            "utilisateur" => $utilisateur
-        ]);
-    }
-
-    #[Route('/profil',name:'app_profil')]
-    public function profilPage()
-    {
-        $utilisateur = $this->getUser();
-
-        return $this->render('utilisateurs/profil.html.twig', [
             "utilisateur" => $utilisateur
         ]);
     }

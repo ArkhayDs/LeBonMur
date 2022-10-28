@@ -18,7 +18,7 @@ class Categories
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Annonce::class, inversedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Annonce::class, inversedBy: 'categories', fetch: "EXTRA_LAZY")]
     private Collection $annonces;
 
     public function __construct()

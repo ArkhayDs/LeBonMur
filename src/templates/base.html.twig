@@ -24,14 +24,16 @@
                     <a class="hoverLink" href="{{ path("app_index") }}">Acceuil</a>
                     <a class="hoverLink" href="{{ path("app_annonces") }}">Annonces</a>
                     <a class="hoverLink" href="{{ path("app_annonce_add") }}">Poster</a>
+                    {% if (app.request.pathinfo != "/annonces") %}
                     <form class="input_search">
                         <input type="search" id="search" class="input_input" placeholder=" ">
                         <label for="search" class="input_label">Recherche</label>
                     </form>
+                    {% endif %}
                 </div>
                 <div class="header_profile_link">
                     {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                        <a class="buttonHover" href="{{ path("app_profil") }}">
+                        <a class="buttonHover" href="{{ path("app_user_id",{ id: utilisateur.id}) }}">
                             Profil
                         </a>
                     {% else %}
@@ -45,15 +47,18 @@
     {% endblock %}
 </header>
 <main>
-    <div class="pub_banner_left pub_banner"
-         style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a
-                class="pub_banner" href="{{ path("app_pub") }}"> </a></div>
-    <div class="main_container">
-        {% block main %}{% endblock %}
+    {% block banner %}{% endblock %}
+    <div class="main_content">
+        <div class="pub_banner_left pub_banner"
+             style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a
+                    class="pub_banner" target="_blank" href="{{ path("app_pub") }}"> </a></div>
+        <div class="main_container">
+            {% block main %}{% endblock %}
+        </div>
+        <div class="pub_banner_right pub_banner"
+             style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a
+                    class="pub_banner" target="_blank" href="{{ path("app_pub") }}"></a></div>
     </div>
-    <div class="pub_banner_right pub_banner"
-         style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a
-                class="pub_banner" href="{{ path("app_pub") }}"></a></div>
 </main>
 </body>
 </html>

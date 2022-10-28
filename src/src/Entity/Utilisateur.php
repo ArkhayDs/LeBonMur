@@ -24,13 +24,13 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Annonce::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Annonce::class, fetch: "EXTRA_LAZY", orphanRemoval: true)]
     private Collection $annonces;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Question::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Question::class, fetch: "EXTRA_LAZY", orphanRemoval: true)]
     private Collection $questions;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Reponse::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Reponse::class, fetch: "EXTRA_LAZY", orphanRemoval: true)]
     private Collection $reponses;
 
     #[ORM\Column(length: 255)]

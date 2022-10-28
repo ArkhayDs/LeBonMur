@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <h1>Hello {{ utilisateur.name }}</h1>
-
-    {% if is_granted('ROLE_ADMIN') %}
-        <h2>Tu es admin</h2>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <h1>Voici ta page profil {{ utilisateur.name }}</h1>
+{#        <h1>Tu es {{ currentUser.name }}</h1>#}
     {% else %}
-        <h2>Tu n'est pas admin</h2>
+        <h1>Bienvenue sur la page vendeur de {{ utilisateur.name }}</h1>
     {% endif %}
 
 {% endblock %}

@@ -36,14 +36,14 @@ class Annonce
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'annonces')]
+    #[ORM\ManyToOne(fetch: "EAGER", inversedBy: 'annonces')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateur $author = null;
 
-    #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: Question::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: Question::class, fetch: "EXTRA_LAZY", orphanRemoval: true)]
     private Collection $questions;
 
-    #[ORM\ManyToMany(targetEntity: Categories::class, mappedBy: 'annonces')]
+    #[ORM\ManyToMany(targetEntity: Categories::class, mappedBy: 'annonces', fetch: "EXTRA_LAZY")]
     private Collection $categories;
 
     public function __construct()

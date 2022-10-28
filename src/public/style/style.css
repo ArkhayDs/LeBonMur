@@ -10,11 +10,14 @@ body {
 }
 
 main {
+    margin-top: 80px;
+    overflow-x: hidden;
+}
+
+.main_content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
-    margin-top: 80px;
-    overflow-x: hidden ;
 }
 
 .pub_banner {
@@ -32,6 +35,7 @@ main {
     position: relative;
     padding: 0 15px;
     background: white;
+    width: 1000px;
 }
 
 li {

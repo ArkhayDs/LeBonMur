@@ -19,10 +19,12 @@ class AnnoncesController extends AbstractController
     #[Route('/annonces',name:'app_annonces')]
     public function showAnnonces(AnnonceRepository $annonceRepository) : Response
     {
-        $annonces = $annonceRepository->findAllPublished();
+        $utilisateur = $this->getUser();
+        $annonces = $annonceRepository->findAllAndJoin();
 
         return $this->render('annonces/index.html.twig', [
-            "annonces" => $annonces
+            "annonces" => $annonces,
+            "utilisateur" => $utilisateur
         ]);
     }
 
@@ -32,7 +34,10 @@ class AnnoncesController extends AbstractController
     #[Route('/annonces/add', name:'app_annonce_add')]
     public function addAnnonce(): Response
     {
-        return $this->render('annonces/addAnnonce.html.twig');
+        $utilisateur = $this->getUser();
+        return $this->render('annonces/addAnnonce.html.twig', [
+            "utilisateur" => $utilisateur
+        ]);
     }
 
     /**
@@ -43,11 +48,12 @@ class AnnoncesController extends AbstractController
     #[Route('/annonces/handle-form', name:'app_annonce_add_form', methods: ['POST'])]
     public function annonceFormHandler(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $utilisateur = $this->getUser();
         $newAnnonce = (new Annonce())
             ->setTitle($request->request->get("title"))
-            ->setDescription($request->request->get("desc"))
+            ->setDescription($request->request->get("description"))
             ->setPrice($request->request->get("price"))
-            ->setAuthor()
+            ->setAuthor($utilisateur)
             ->setPhotos(["pasdurl","toujourspas"])
             ->setCreatedAt(new \DateTime())
             ->setSlug(strtolower(str_replace(" ","-",$request->request->get("title"))));
@@ -55,22 +61,24 @@ class AnnoncesController extends AbstractController
         $entityManager->persist($newAnnonce);
         $entityManager->flush();
 
-        return $this->redirectToRoute("app_index");
+        return $this->redirectToRoute("app_annonces");
     }
 
-/**
+    /**
      * @return Response
      */
     #[Route('/annonces/{id}', name:'app_annonce_id', methods: ['GET'])]
     public function annonceById(AnnonceRepository $annonceRepository, $id): Response
     {
+        $utilisateur = $this->getUser();
         $annonce = $annonceRepository->findByIdAndJoin($id);
         $tempo = [1,1,1];
 
         if (sizeof($annonce) === 1) {
             return $this->render('annonces/annonceById.html.twig', [
                 'annonce' => $annonce[0],
-                'tempo' => $tempo
+                'tempo' => $tempo,
+                'utilisateur' => $utilisateur
             ]);
         } else {
             return $this->redirectToRoute('app_index');

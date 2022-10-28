@@ -22,11 +22,11 @@ class Reponse
     #[Slug(fields: ['content'])]
     private ?string $slug = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reponses')]
+    #[ORM\ManyToOne(fetch: "EXTRA_LAZY", inversedBy: 'reponses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateur $author = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reponses')]
+    #[ORM\ManyToOne(fetch: "EXTRA_LAZY", inversedBy: 'reponses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Question $question = null;
 

@@ -71,8 +71,10 @@ class AnnonceRepository extends ServiceEntityRepository
         return $this->createQueryBuilder("a")
             ->innerJoin("a.questions","q")
             ->innerJoin("q.reponses","r")
+            ->innerJoin("a.author","u")
             ->addSelect("q")
             ->addSelect("r")
+            ->addSelect("u")
             ->getQuery()
             ->getResult();
     }
