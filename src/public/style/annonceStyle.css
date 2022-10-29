@@ -34,9 +34,22 @@
     align-items: center;
 }
 
-.annonce_card_categorie {
+.annonce_card_infos_plus div p {
+    margin: 5px 0;
+}
+
+.annonce_card_infos_plus div p:first-child {
+    margin-top: 75px;
+}
+
+.annonce_card_categorie,
+.annonce_card_createdat {
     color: #6E6E6E;
     font-weight: 1;
+}
+
+.annonce_card_categorie a:hover {
+    color: #0a0a0a;
 }
 
 .filterContainer {

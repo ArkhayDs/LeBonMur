@@ -39,6 +39,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
+    #[ORM\Column(nullable:true)]
+    private ?float $Note;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
@@ -186,6 +189,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getNote(): ?float
+    {
+        return $this->Note;
+    }
+
+    public function setNote(float $Note): self
+    {
+        $this->Note = $Note;
 
         return $this;
     }

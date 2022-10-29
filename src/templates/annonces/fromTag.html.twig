@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/style/annonceStyle.css">
+{% endblock %}
+
+{% block main %}
+    <div class="filterContainer">
+        <div class="filterForm">
+            <div class="deroulant"><a href="#">Catégories</a>
+                <ul class="sous">
+                    {% for categorie in categories %}
+                        <li><a href="{{ path("app_annonce_from_tag", { tag: categorie.name }) }}">{{ categorie.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <form class="input_search ">
+                <input type="search" id="search" class="input_input" placeholder=" ">
+                <label for="search" class="input_label">Recherche</label>
+            </form>
+        </div>
+        <a class="buttonCharge" href="#">
+            <h2 class="buttonChargeText">Filtrer</h2>
+        </a>
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+    <div>
+        <div class="annonces_container">
+            {% for annonce in annonces %}
+                <div class="annonce_card">
+                    <div class="img_annonce"
+                         style="background-image: url('https://images.caradisiac.com/logos/3/7/7/6/273776/S7-essai-moto-guzzi-v100-s-la-jeunesse-centenaire-198620.jpg')"></div>
+
+                    <div class="annonce_card_infos">
+                        <h2>{{ annonce.title }}</h2>
+                        <div class="annonce_card_categorie">
+                            {% for categorie in annonce.categories %}
+                                <a href="{{ path("app_annonce_from_tag", { tag: categorie.name }) }}"><span>| {{ categorie.name }} |</span></a>
+                            {% endfor %}
+                        </div>
+                        <div class="annonce_card_infos_plus">
+                            <div>
+                                <p>{{ annonce.price}} €</p>
+                                <a href="{{ path("app_user_id",{ id: annonce.author.id}) }}">{{ annonce.author.name }}</a>
+                            </div>
+                            <div>
+                                <a class="buttonHover" href="{{ path("app_annonce_id",{ id: annonce.id}) }}">Voir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

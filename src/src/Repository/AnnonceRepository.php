@@ -72,9 +72,11 @@ class AnnonceRepository extends ServiceEntityRepository
             ->innerJoin("a.questions","q")
             ->innerJoin("q.reponses","r")
             ->innerJoin("a.author","u")
+            ->leftJoin('a.categories','c')
             ->addSelect("q")
             ->addSelect("r")
             ->addSelect("u")
+            ->addSelect("c")
             ->getQuery()
             ->getResult();
     }
@@ -88,10 +90,27 @@ class AnnonceRepository extends ServiceEntityRepository
         return $this->createQueryBuilder("a")
             ->andWhere("a.id =:value")
             ->setParameter("value",$id)
-            ->innerJoin("a.questions","q")
-            ->innerJoin("q.reponses","r")
+            ->leftJoin("a.questions","q")
+            ->leftJoin("q.reponses","r")
+            ->leftJoin('a.categories','c')
             ->addSelect("q")
             ->addSelect("r")
+            ->addSelect("c")
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param $value
+     * @return array
+     */
+    public function findAllFromTag($value): array
+    {
+        return $this->createQueryBuilder("a")
+            ->leftJoin('a.categories','c')
+            ->andWhere('c.name =:value')
+            ->setParameter("value",$value)
+            ->addSelect('c')
             ->getQuery()
             ->getResult();
     }

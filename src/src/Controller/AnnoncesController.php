@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Annonce;
 use App\Repository\AnnonceRepository;
+use App\Repository\CategoriesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,14 +18,16 @@ class AnnoncesController extends AbstractController
      * @return Response
      */
     #[Route('/annonces',name:'app_annonces')]
-    public function showAnnonces(AnnonceRepository $annonceRepository) : Response
+    public function showAnnonces(AnnonceRepository $annonceRepository, CategoriesRepository $categoriesRepository) : Response
     {
         $utilisateur = $this->getUser();
         $annonces = $annonceRepository->findAllAndJoin();
+        $categories = $categoriesRepository->findAll();
 
         return $this->render('annonces/index.html.twig', [
             "annonces" => $annonces,
-            "utilisateur" => $utilisateur
+            "utilisateur" => $utilisateur,
+            "categories" => $categories
         ]);
     }
 
@@ -100,5 +103,22 @@ class AnnoncesController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute("app_index");
+    }
+
+    /**
+     * @return Response
+     */
+    #[Route('/annonces/categorie/{tag}',name:'app_annonce_from_tag')]
+    public function showAllFromTag(AnnonceRepository $annonceRepository, CategoriesRepository $categoriesRepository, $tag) : Response
+    {
+        $utilisateur = $this->getUser();
+        $annonces = $annonceRepository->findAllFromTag($tag);
+        $categories = $categoriesRepository->findAll();
+
+        return $this->render('annonces/fromTag.html.twig', [
+            "annonces" => $annonces,
+            "utilisateur" => $utilisateur,
+            "categories" => $categories
+        ]);
     }
 }
