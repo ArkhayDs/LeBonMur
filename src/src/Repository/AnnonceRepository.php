@@ -69,8 +69,8 @@ class AnnonceRepository extends ServiceEntityRepository
     public function findAllAndJoin(): array
     {
         return $this->createQueryBuilder("a")
-            ->innerJoin("a.questions","q")
-            ->innerJoin("q.reponses","r")
+            ->leftJoin("a.questions","q")
+            ->leftJoin("q.reponses","r")
             ->innerJoin("a.author","u")
             ->leftJoin('a.categories','c')
             ->addSelect("q")

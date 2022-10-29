@@ -19,6 +19,13 @@
             <input type="number" id="prix" name="price" class="input_input" placeholder=" ">
             <label for="prix"  class="input_label">Prix</label>
         </div>
+        <div class="input_container">
+            <p>Sélectionnez les catégories :</p>
+            {% for categorie in categories %}
+                <input type="checkbox" name="categories[]" id="{{ categorie.name }}" value="{{ categorie.name }}">
+                <label for="{{ categorie.name }}">{{ categorie.name }}</label>
+            {% endfor %}
+        </div>
         <div class="input_container file_contaienr">
             <input type="file" name="file" id="file" class="inputfile" />
             <label class="buttonCharge" for="file"><p class="buttonChargeText">Choisis des photos</p></label>

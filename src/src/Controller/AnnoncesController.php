@@ -36,11 +36,14 @@ class AnnoncesController extends AbstractController
      * @return Response
      */
     #[Route('/annonces/add', name:'app_annonce_add')]
-    public function addAnnonce(): Response
+    public function addAnnonce(CategoriesRepository $categoriesRepository): Response
     {
         $utilisateur = $this->getUser();
+        $categories = $categoriesRepository->findAll();
+
         return $this->render('annonces/addAnnonce.html.twig', [
-            "utilisateur" => $utilisateur
+            "utilisateur" => $utilisateur,
+            "categories" => $categories
         ]);
     }
 
@@ -50,7 +53,7 @@ class AnnoncesController extends AbstractController
      * @return Response
      */
     #[Route('/annonces/handle-form', name:'app_annonce_add_form', methods: ['POST'])]
-    public function annonceFormHandler(Request $request, EntityManagerInterface $entityManager): Response
+    public function annonceFormHandler(Request $request, EntityManagerInterface $entityManager, CategoriesRepository $categoriesRepository): Response
     {
         $utilisateur = $this->getUser();
         $newAnnonce = (new Annonce())
@@ -62,6 +65,10 @@ class AnnoncesController extends AbstractController
             ->setCreatedAt(new \DateTime())
             ->setSlug(strtolower(str_replace(" ","-",$request->request->get("title"))));
 
+//        foreach($request->request->all()["categories"] as $category) {
+//            $newAnnonce->addCategory($categoriesRepository->findBy(["name" => $category])[0]);
+//        }
+
         $entityManager->persist($newAnnonce);
         $entityManager->flush();
 
@@ -69,6 +76,8 @@ class AnnoncesController extends AbstractController
     }
 
     /**
+     * @param AnnonceRepository $annonceRepository
+     * @param $id
      * @return Response
      */
     #[Route('/annonces/{id}', name:'app_annonce_id', methods: ['GET'])]
@@ -88,7 +97,6 @@ class AnnoncesController extends AbstractController
             return $this->redirectToRoute('app_index');
         }
     }
-
 
 
     /**
