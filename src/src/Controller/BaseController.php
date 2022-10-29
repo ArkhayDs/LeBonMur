@@ -67,9 +67,9 @@ class BaseController extends AbstractController
                 );
             }
 
-            return $this->render('utilisateurs/register.html.twig', [
-                'error' => 'Les deux mots de passes ne sont pas identiques'
-            ]);
+            $this->addFlash('error', 'La création à échouée ! Les deux mots de passes ne correspondent pas.');
+
+            return $this->render('utilisateurs/register.html.twig');
         }
 
         return $this->render('utilisateurs/register.html.twig');
