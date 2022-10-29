@@ -42,7 +42,7 @@
         <div>
             <h2>Vendeur</h2>
             <div class="vendorInfos user-note">
-                <a class="buttonHover" href="{{ path("app_user_id", {id: utilisateur.id,}) }}">{{ annonce.author.name }}</a>
+                <a class="buttonHover" href="{{ path("app_user_id", {id: annonce.author.id,}) }}">{{ annonce.author.name }}</a>
                 <span>Que pensez-vous de ce vendeur ?</span>
                 <form action="{{ path('app_user_note', { id: annonce.author.id}) }}" method="post">
                     <button class="user-note-up" name="noter" value="up">+1</button>

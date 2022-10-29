@@ -1,11 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block main %}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <h1>Voici ta page profil {{ utilisateur.name }}</h1>
-{#        <h1>Tu es {{ currentUser.name }}</h1>#}
-    {% else %}
-        <h1>Bienvenue sur la page vendeur de {{ utilisateur.name }}</h1>
-    {% endif %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/style/annonceStyle.css">
+    <link rel="stylesheet" href="/style/profilStyle.css">
+{% endblock %}
 
+{% block main %}
+    <div class="profil_container">
+        <div>
+            <h1>{{ visitedUser.name }}</h1>
+        </div>
+        {% if (visitedUser.id == utilisateur.id) %}
+            <div>
+                <a class="buttonHover" href="{{ path("app_logout") }}">Se déconnecter</a>
+            </div>
+        {% else %}
+            <div>
+                <span>Que pensez-vous de ce vendeur ?</span>
+                <form class="form_profilVote" action="{{ path('app_user_note', { id: visitedUser.id}) }}" method="post">
+                    <button class="user-note-up" name="noter" value="up">+1</button>
+                    <span class="user-note-total"> {{ visitedUser.note }} </span>
+                    <button class="user-note-down" name="noter" value="down">-1</button>
+                </form>
+            </div>
+        {% endif %}
+
+    </div>
+    <div class="annonces_container">
+        <div class="annonces_infos">
+            <p>Nombre d'annonces : {{ visitedUser.annonces.count }}</p>
+        </div>
+        {% for annonce in visitedUser.annonces %}
+            <div class="annonce_card">
+                <div class="img_annonce"
+                     style="background-image: url('https://images.caradisiac.com/logos/3/7/7/6/273776/S7-essai-moto-guzzi-v100-s-la-jeunesse-centenaire-198620.jpg')"></div>
+
+                <div class="annonce_card_infos">
+                    <h2>{{ annonce.title }}</h2>
+                    <div class="annonce_card_categorie">
+                        {% for categorie in annonce.categories %}
+                            <a href="{{ path("app_annonce_from_tag", { tag: categorie.name }) }}"><span>| {{ categorie.name }} |</span></a>
+                        {% endfor %}
+                    </div>
+                    <div class="annonce_card_infos_plus">
+                        <div>
+                            <p>{{ annonce.price }} €</p>
+                            <a href="{{ path("app_user_id",{ id: annonce.author.id}) }}">{{ annonce.author.name }}</a>
+                            <p class="annonce_card_createdat">Publié le: {{ annonce.createdAt|date('Y-m-d') }}</p>
+                        </div>
+                        <div>
+                            <a class="buttonHover" href="{{ path("app_annonce_id",{ id: annonce.id}) }}">Voir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -34,13 +34,13 @@ class UtilisateurController extends AbstractController
     #[Route('/profil/{id}', name: 'app_user_id', methods: ['GET'])]
     public function userById(UtilisateurRepository $utilisateurRepository, $id): Response
     {
-        $currentUser = $this->getUser();
-        $utilisateur = $utilisateurRepository->findByIdAndJoin($id);
+        $utilisateur = $this->getUser();
+        $visitedUser = $utilisateurRepository->findByIdAndJoin($id);
 
-        if (sizeof($utilisateur) === 1) {
+        if (sizeof($visitedUser) === 1) {
             return $this->render('utilisateurs/profil.html.twig', [
-                'utilisateur' => $utilisateur[0],
-                'currentUser' => $currentUser
+                'visitedUser' => $visitedUser[0],
+                'utilisateur' => $utilisateur
 
             ]);
         } else {
