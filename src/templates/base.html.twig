@@ -25,10 +25,10 @@
                     <a class="hoverLink" href="{{ path("app_annonces") }}">Annonces</a>
                     <a class="hoverLink" href="{{ path("app_annonce_add") }}">Poster</a>
                     {% if (app.request.pathinfo != "/annonces") %}
-                    <form class="input_search">
-                        <input type="search" id="search" class="input_input" placeholder=" ">
-                        <label for="search" class="input_label">Recherche</label>
-                    </form>
+                        <form class="input_search">
+                            <input type="search" id="search" class="input_input" placeholder=" ">
+                            <label for="search" class="input_label">Recherche</label>
+                        </form>
                     {% endif %}
                 </div>
                 <div class="header_profile_link">
@@ -49,16 +49,67 @@
 <main>
     {% block banner %}{% endblock %}
     <div class="main_content">
-        <div class="pub_banner_left pub_banner"
-             style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a
-                    class="pub_banner" target="_blank" href="{{ path("app_surprise_jf") }}"> </a></div>
+        <div class="jf_banner_left jf_banner"
+             style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')">
+            <a
+                    class="jf_banner" target="_blank" href="{{ path("app_surpriseJF") }}"> </a></div>
         <div class="main_container">
             {% block main %}{% endblock %}
         </div>
-        <div class="pub_banner_right pub_banner"
-             style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')"><a
-                    class="pub_banner" target="_blank" href="{{ path("app_surprise_jf") }}"></a></div>
+        <div class="jf_banner_right jf_banner"
+             style="background-image: url('https://www.20dollarbanners.com/img/portfolio/160x600/9KTzfd60715_r_1.gif')">
+            <a
+                    class="jf_banner" target="_blank" href="{{ path("app_surpriseJF") }}"></a></div>
     </div>
 </main>
+<footer>
+    {% block footer %}
+        <nav class="nav_footer">
+            <div>
+                <h3>Qui somme nous ?</h3>
+                <a href="#">Quelqu'un utilise vraiment les footer ?</a><br/>
+                <a href="#">Pourquoi tu veux cliquer là ?</a><br/>
+                <a href="#">Après tu as compris que c'est du remplisage ?</a><br/>
+            </div>
+            <div>
+                <h3>INFORMATIONS LÉGALES</h3>
+                <a href="#">Conditions générales d’utilisation</a><br/>
+                <a href="#">Référencement et classement des annonces</a><br/>
+                <a href="#">Conditions générales de vente</a><br/>
+                <a href="#">Vie privée / cookies</a><br/>
+                <a href="#">Vos droits et obligations</a><br/>
+                <a href="#">Avis utilisateurs</a><br/>
+                <a href="#">Charte de bonne conduite</a><br/>
+                <a href="#">Paiement en plusieurs fois</a><br/>
+                <a href="#">Décisions de justice</a><br/>
+                <a href="#">C'est long de copier tous ça du boncoin</a><br/>
+            </div>
+            <div>
+                <h3>NOS SOLUTIONS PROS</h3>
+                <a href="#">Publicité</a><br/>
+                <a href="#">Professionnels de l’immobilier</a><br/>
+                <a href="#">Vos recrutements</a><br/>
+                <a href="#">Professionnels de l’auto</a><br/>
+                <a href="#">Professionnels du tourisme</a><br/>
+                <a href="#">Autres solutions professionnelles</a><br/>
+                <a href="#">Annuaire des professionnels</a><br/>
+                <a href="#">Dépôt gratuit d’emploi pour les TPE</a><br/>
+            </div>
+            <div>
+                <h3>DES QUESTIONS ?</h3>
+                <a href="#">Aide</a><br/>
+                <a href="#">Le service de paiement sécurisé et la livraison</a><br/>
+                <a href="#">Le porte-monnaie</a><br/>
+                <a href="#">Le service de réservation de vacances en ligne pour les hôtes</a><br/>
+                <a href="#">Votre dossier de location en ligne</a><br/>
+                <a href="#">Demandez conseil à la Communauté</a><br/>
+                <a href="#">Statut de nos services</a><br/>
+            </div>
+        </nav>
+        <div>
+            lebonmur 2022 - 2077
+        </div>
+    {% endblock %}
+</footer>
 </body>
 </html>

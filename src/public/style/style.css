@@ -20,15 +20,16 @@ main {
     grid-template-rows: 1fr;
 }
 
-.pub_banner {
+.jf_banner {
     min-height: 1700px;
     width: 100%;
     background-size: contain;
+    position: relative;
 }
-.pub_banner a {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
+.jf_banner a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
 }
 .main_container {
@@ -104,6 +105,31 @@ header nav {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    background: #2e3136;
+    color: white;
+    gap: 30px;
+    padding: 30px;
+    justify-content: space-around;
+    align-items: center;
+}
+.nav_footer {
+    display: grid;
+    grid-template-rows:1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 50px;
+}
+.nav_footer a {
+    color: white;
+    font-size: 12px;
+    line-height: 2;
+}
+footer div {
+    font-size: 12px;
 }
 
 .input_search {
@@ -291,3 +317,4 @@ header nav {
 .buttonCharge:hover .buttonChargeText {
     color: #FFF;
 }
+
