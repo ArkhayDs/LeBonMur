@@ -109,3 +109,11 @@ h2 {
 .button_form {
     padding-top: 5px;
 }
+
+.questionDiv {
+    margin-top: 30px;
+}
+
+.vendorInfos {
+    display: flex;
+}

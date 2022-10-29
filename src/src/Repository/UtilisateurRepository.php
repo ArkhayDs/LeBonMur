@@ -51,7 +51,6 @@ class UtilisateurRepository extends ServiceEntityRepository
             ->addSelect("a")
             ->getQuery()
             ->getResult();
-
     }
 
 
@@ -64,37 +63,13 @@ class UtilisateurRepository extends ServiceEntityRepository
         return $this->createQueryBuilder("u")
             ->andWhere("u.id =:value")
             ->setParameter("value",$id)
-            ->innerJoin("u.annonces","a")
-            ->innerJoin("u.questions","q")
-            ->innerJoin("u.reponses","r")
+            ->leftJoin("u.annonces","a")
+            ->leftJoin("u.questions","q")
+            ->leftJoin("u.reponses","r")
             ->addSelect("a")
             ->addSelect("q")
             ->addSelect("r")
             ->getQuery()
             ->getResult();
     }
-//    /**
-//     * @return Utilisateur[] Returns an array of Utilisateur objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Utilisateur
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

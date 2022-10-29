@@ -7,6 +7,7 @@ use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -28,6 +29,8 @@ class UtilisateurController extends AbstractController
     }
 
     /**
+     * @param UtilisateurRepository $utilisateurRepository
+     * @param $id
      * @return Response
      */
     #[Route('/profil/{id}', name:'app_user_id', methods: ['GET'])]
@@ -40,7 +43,6 @@ class UtilisateurController extends AbstractController
             return $this->render('utilisateurs/profil.html.twig', [
                 'utilisateur' => $utilisateur[0],
                 'currentUser' => $currentUser
-
             ]);
         } else {
             return $this->redirectToRoute('app_index');
@@ -77,5 +79,30 @@ class UtilisateurController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute("app_users_index");
+    }
+
+    /**
+     * @param Utilisateur $utilisateur
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    #[Route('/user/note/{id}', name:'app_user_note', methods: ['POST'])]
+    public function userVote(Utilisateur $utilisateur, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $noter = $request->request->get('noter');
+
+        if ($noter === 'up') {
+            $utilisateur->upNote();
+        }
+        if ($noter === 'down') {
+            $utilisateur->downNote();
+        }
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_user_id', [
+            "id" => $utilisateur->getId()
+        ]);
     }
 }
