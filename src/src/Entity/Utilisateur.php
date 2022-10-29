@@ -9,6 +9,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
@@ -40,7 +42,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[ORM\Column(nullable: true)]
-    private ?float $Note;
+    private ?float $note = 0;
 
     public function __construct()
     {
@@ -195,12 +197,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getNote(): ?float
     {
-        return $this->Note;
+        return $this->note;
     }
 
-    public function setNote(float $Note): self
+    public function setNote(float $note): self
     {
-        $this->Note = $Note;
+        $this->note = $note;
 
         return $this;
     }

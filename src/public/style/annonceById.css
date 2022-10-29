@@ -134,5 +134,12 @@ h2 {
 
 .input_container {
     margin: 0;
+}
 
+.questionDiv {
+    margin-top: 30px;
+}
+
+.vendorInfos {
+    display: flex;
 }

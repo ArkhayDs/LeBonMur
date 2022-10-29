@@ -29,6 +29,8 @@ class UtilisateurController extends AbstractController
     }
 
     /**
+     * @param UtilisateurRepository $utilisateurRepository
+     * @param $id
      * @return Response
      */
     #[Route('/profil/{id}', name: 'app_user_id', methods: ['GET'])]
@@ -41,7 +43,6 @@ class UtilisateurController extends AbstractController
             return $this->render('utilisateurs/profil.html.twig', [
                 'visitedUser' => $visitedUser[0],
                 'utilisateur' => $utilisateur
-
             ]);
         } else {
             return $this->redirectToRoute('app_index');
