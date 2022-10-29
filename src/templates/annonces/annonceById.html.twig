@@ -9,23 +9,20 @@
 {% block main %}
     <section class="info">
         <div class="container_image">
-            <div class="first_image">
-                <figure>
-                    <img src="https://images.pexels.com/photos/2611686/pexels-photo-2611686.jpeg"></img>
-                </figure>
-            </div>
-            <div class="rest_image">
-                <div class="contain_image {{ tempo|length == 2 ? 'full_height' }}">
+            {% for photo in annonce.photos %}
+                <div class="first_image">
                     <figure>
-                        <img src="https://images.pexels.com/photos/2611686/pexels-photo-2611686.jpeg"></img>
+                        <img src="{{ annonce.photos ? '/uploads/' ~ annonce.photos[0] : 'https://images.caradisiac.com/logos/3/7/7/6/273776/S7-essai-moto-guzzi-v100-s-la-jeunesse-centenaire-198620.jpg' }}"></img>
                     </figure>
                 </div>
-                <div class="contain_image">
+            {% endfor %}
+            {% if annonce.photos|length == 0 %}
+                <div class="first_image">
                     <figure>
-                        <img src="https://images.pexels.com/photos/2611686/pexels-photo-2611686.jpeg"></img>
+                        <img src="{{ annonce.photos ? '/uploads/' ~ annonce.photos[0] : 'https://images.caradisiac.com/logos/3/7/7/6/273776/S7-essai-moto-guzzi-v100-s-la-jeunesse-centenaire-198620.jpg' }}"></img>
                     </figure>
                 </div>
-            </div>
+            {% endif %}
         </div>
 
         <div>
@@ -56,7 +53,7 @@
             <h2>Questions</h2>
             <div>
                 {% if ( annonce.author.id != utilisateur.id ) %}
-                    <form action="get" class="question_form">
+                    <form action="{{ path("app_question_add",{ idAnnonce: annonce.id }) }}" class="question_form" method="post">
                         <div class="contain_question_form">
                             <div class="input_container">
                                 <input class="input_input" type="text" name="content" id="content" placeholder=" " required>
@@ -70,11 +67,11 @@
                 {% endif %}
                 {% for question in annonce.questions %}
                     <div class="container_block_question">
-                        <p class="question__block_title">Question : @{{ question.createdAt|date("m/d/Y") }}</p>
+                        <p class="question__block_title">Question de {{ question.author.name }}: @{{ question.createdAt|date("m/d/Y") }}</p>
                         <div class="content_question">
                             <p>{{ question.content }}</p>
                             {% if ( annonce.author.id == utilisateur.id ) %}
-                                <form action="get" class="answer_form">
+                                <form action="{{ path("app_reponse_add",{ idAnnonce: annonce.id, idQuestion: question.id }) }}" class="answer_form" method="post">
                                     <div class="contain_answer_form">
                                         <div class="input_container">
                                             <input class="input_input" type="text" name="contentReponse" id="contentReponse" placeholder=" " required>
@@ -89,7 +86,7 @@
                         </div>
                         {% for reponse in question.reponses %}
                             <div class="container_block_answer">
-                                <p class="question__block_title">Réponse : @{{ reponse.createdAt|date("m/d/Y") }}</p>
+                                <p class="question__block_title">Réponse de {{ reponse.author.name }} : @{{ reponse.createdAt|date("m/d/Y") }}</p>
                                 <p class="content_answer">{{ reponse.content }}</p>
                             </div>
                         {% endfor %}

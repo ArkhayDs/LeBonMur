@@ -6,7 +6,8 @@
 {% endblock %}
 
 {% block main %}
-    <form class="form_add_annonce" action="{{ path('app_annonce_add_form') }}" method="post">
+    <form class="form_add_annonce" action="{{ path('app_annonce_add_form') }}" method="post"
+    enctype="multipart/form-data">
         <div class="input_container">
             <input type="text" id="titre" name="title" class="input_input" placeholder=" ">
             <label for="titre"  class="input_label">Titre</label>
@@ -27,7 +28,7 @@
             {% endfor %}
         </div>
         <div class="input_container file_contaienr">
-            <input type="file" name="file" id="file" class="inputfile" />
+            <input type="file" name="photo" id="file"  />
             <label class="buttonCharge" for="file"><p class="buttonChargeText">Choisis des photos</p></label>
         </div>
         <input class="buttonHover" type="submit" value="Publier votre annonce"/>

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Slug;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
 class Question
@@ -23,18 +24,18 @@ class Question
     #[Slug(fields: ['content'])]
     private ?string $slug = null;
 
-    #[ORM\ManyToOne(cascade: ['persist', 'remove'], fetch: "EXTRA_LAZY", inversedBy: 'questions')]
+    #[ORM\ManyToOne(cascade: ['persist', 'remove'], inversedBy: 'questions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateur $author = null;
 
-    #[ORM\ManyToOne(cascade: ['persist', 'remove'], fetch: "EXTRA_LAZY", inversedBy: 'questions')]
+    #[ORM\ManyToOne(cascade: ['persist', 'remove'], inversedBy: 'questions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Annonce $annonce = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Reponse::class, fetch: "EXTRA_LAZY", orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Reponse::class, orphanRemoval: true)]
     private Collection $reponses;
 
     public function __construct()
@@ -136,8 +137,10 @@ class Question
     /**
      * @param string|null $slug
      */
-    public function setSlug(?string $slug): void
+    public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
     }
 }

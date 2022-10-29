@@ -7,7 +7,7 @@ use App\Repository\AnnonceRepository;
 use App\Repository\CategoriesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
-use PhpParser\Node\Expr\Array_;
+use Gedmo\Sluggable\Util\Urlizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnnoncesController extends AbstractController
 {
     /**
+     * @param AnnonceRepository $annonceRepository
+     * @param CategoriesRepository $categoriesRepository
      * @return Response
      */
     #[Route('/annonces',name:'app_annonces')]
@@ -33,6 +35,7 @@ class AnnoncesController extends AbstractController
     }
 
     /**
+     * @param CategoriesRepository $categoriesRepository
      * @return Response
      */
     #[Route('/annonces/add', name:'app_annonce_add')]
@@ -50,6 +53,7 @@ class AnnoncesController extends AbstractController
     /**
      * @param Request $request
      * @param EntityManagerInterface $entityManager
+     * @param CategoriesRepository $categoriesRepository
      * @return Response
      */
     #[Route('/annonces/handle-form', name:'app_annonce_add_form', methods: ['POST'])]
@@ -61,13 +65,23 @@ class AnnoncesController extends AbstractController
             ->setDescription($request->request->get("description"))
             ->setPrice($request->request->get("price"))
             ->setAuthor($utilisateur)
-            ->setPhotos(["pasdurl","toujourspas"])
             ->setCreatedAt(new \DateTime())
             ->setSlug(strtolower(str_replace(" ","-",$request->request->get("title"))));
 
-//        foreach($request->request->all()["categories"] as $category) {
-//            $newAnnonce->addCategory($categoriesRepository->findBy(["name" => $category])[0]);
-//        }
+        foreach($request->request->all()["categories"] as $category) {
+            $newAnnonce->addCategory($categoriesRepository->findBy(["name" => $category])[0]);
+        }
+
+        $newPhoto = $request->files->get('photo');
+        $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+        $originalPhotoName = $newPhoto->getClientOriginalName();
+
+        $baseFileName = pathinfo($originalPhotoName, PATHINFO_FILENAME);
+        $photoName = Urlizer::urlize($baseFileName) . '-' . uniqid() . '.' . $newPhoto->guessExtension();
+
+        $newPhoto->move($destination, $photoName);
+        $newAnnonce->setPhotos([$photoName]);
+
 
         $entityManager->persist($newAnnonce);
         $entityManager->flush();
@@ -100,8 +114,10 @@ class AnnoncesController extends AbstractController
 
 
     /**
-     * @throws ORMException
+     * @param $id
+     * @param EntityManagerInterface $entityManager
      * @return Response
+     * @throws ORMException
      */
     #[Route('/annonces/delete/{id}', name:'app_annonce_delete', methods: ['DELETE'])]
     public function deleteAnnonce($id, EntityManagerInterface $entityManager): Response
@@ -115,6 +131,9 @@ class AnnoncesController extends AbstractController
     }
 
     /**
+     * @param AnnonceRepository $annonceRepository
+     * @param CategoriesRepository $categoriesRepository
+     * @param $tag
      * @return Response
      */
     #[Route('/annonces/categorie/{tag}',name:'app_annonce_from_tag')]

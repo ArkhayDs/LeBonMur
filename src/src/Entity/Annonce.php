@@ -30,13 +30,13 @@ class Annonce
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::ARRAY, nullable:true)]
     private array $photos = [];
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\ManyToOne(fetch: "EAGER", inversedBy: 'annonces')]
+    #[ORM\ManyToOne(inversedBy: 'annonces')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateur $author = null;
 
