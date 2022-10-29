@@ -39,7 +39,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
-    #[ORM\Column(nullable:true)]
+    #[ORM\Column(nullable: true)]
     private ?float $Note;
 
     public function __construct()
@@ -202,6 +202,24 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->Note = $Note;
 
+        return $this;
+    }
+
+    public function getNoteString(): string
+    {
+        $prefix = $this->getNote() >= 0 ? "+" : "-";
+        return sprintf('%s %d', $prefix, abs($this->getNote()));
+    }
+
+    public function upNote(): self
+    {
+        $this->note++;
+        return $this;
+    }
+
+    public function downNote(): self
+    {
+        $this->note--;
         return $this;
     }
 }

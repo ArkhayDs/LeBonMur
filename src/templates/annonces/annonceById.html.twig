@@ -25,52 +25,78 @@
                         <img src="https://images.pexels.com/photos/2611686/pexels-photo-2611686.jpeg"></img>
                     </figure>
                 </div>
-            </div> 
+            </div>
         </div>
-        <h1>{{ annonce.title }}</h1>
-        <p class="price">{{ annonce.price }} €</p>
-        <p class="date">{{ annonce.createdAt|date("m/d/Y") }}</p>
 
-        <h2>Description</h2>
-        <p class="description">{{ annonce.description }}</p>
-
-        <h2>Questions</h2>
         <div>
-            <form action="get" class="question_form">
-                <div class="contain_question_form">
-                    <label for="content"></label>
-                    <input type="text" name="content" id="content" placeholder="Ecrivez votre question" required>
-                    <div class="button_form">
-                        <input type="submit" value="Envoyer">
-                    </div>
-                </div>
-            </form>
-            {% for question in annonce.questions %}
-                <div class="container_block_question">
-                    <p class="question__block_title">Question :</p>
-                    <div class="content_question">
-                        <p>{{ question.content }}</p>
-                        <form action="get" class="answer_form">
-                            <div class="contain_answer_form">
-                                <label for="content"></label>
-                                <input type="text" name="content" id="content" placeholder="Ecrivez votre réponse" required>
-                                <div class="button_form">
-                                    <input type="submit" value="Envoyer">
-                                </div>
+            <h1>{{ annonce.title }}</h1>
+            <p class="price">{{ annonce.price }} €</p>
+            <p class="date">{{ annonce.createdAt|date("m/d/Y") }}</p>
+        </div>
+
+        <div>
+            <h2>Description</h2>
+            <p class="description">{{ annonce.description }}</p>
+        </div>
+
+        <div>
+            <h2>Vendeur</h2>
+            <div class="vendorInfos user-note">
+                <a class="buttonHover" href="{{ path("app_user_id", {id: utilisateur.id,}) }}">{{ annonce.author.name }}</a>
+                <span>Que pensez-vous de ce vendeur ?</span>
+                <form action="{{ path('app_user_note', { id: annonce.author.id}) }}" method="post">
+                    <button class="user-note-up" name="noter" value="up">+1</button>
+                    <span class="user-note-total"> {{ annonce.author.note }} </span>
+                    <button class="user-note-down" name="noter" value="down">-1</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="questionDiv">
+            <h2>Questions</h2>
+            <div>
+                {% if ( annonce.author.id != utilisateur.id ) %}
+                    <form action="get" class="question_form">
+                        <div class="contain_question_form">
+                            <div class="input_container">
+                                <input class="input_input" type="text" name="content" id="content" placeholder=" " required>
+                                <label for="content" class="input_label">Question</label>
                             </div>
-                        </form>
-                    </div>
-                </div>
-
-                {% for reponse in question.reponses %}
+                            <div class="buttonCharge">
+                                <input type="submit" class="buttonChargeText" value="Envoyer">
+                            </div>
+                        </div>
+                    </form>
+                {% endif %}
+                {% for question in annonce.questions %}
                     <div class="container_block_question">
-                        <p class="question__block_title">Réponse :</p>
-                        <p class="content_answer">{{ reponse.content }}</p>
+                        <p class="question__block_title">Question : @{{ question.createdAt|date("m/d/Y") }}</p>
+                        <div class="content_question">
+                            <p>{{ question.content }}</p>
+                            {% if ( annonce.author.id == utilisateur.id ) %}
+                                <form action="get" class="answer_form">
+                                    <div class="contain_answer_form">
+                                        <div class="input_container">
+                                            <input class="input_input" type="text" name="contentReponse" id="contentReponse" placeholder=" " required>
+                                            <label for="contentReponse" class="input_label">Réponse</label>
+                                        </div>
+                                        <div class="buttonCharge">
+                                            <input type="submit" class="buttonChargeText" value="Envoyer">
+                                        </div>
+                                    </div>
+                                </form>
+                            {% endif %}
+                        </div>
+                        {% for reponse in question.reponses %}
+                            <div class="container_block_answer">
+                                <p class="question__block_title">Réponse : @{{ reponse.createdAt|date("m/d/Y") }}</p>
+                                <p class="content_answer">{{ reponse.content }}</p>
+                            </div>
+                        {% endfor %}
                     </div>
-
+                    <br />
                 {% endfor %}
-            <br />
-            {% endfor %}
+            </div>
         </div>
     </section>
 
