@@ -72,16 +72,22 @@ class AnnoncesController extends AbstractController
             $newAnnonce->addCategory($categoriesRepository->findBy(["name" => $category])[0]);
         }
 
-        $newPhoto = $request->files->get('photo');
-        $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
-        $originalPhotoName = $newPhoto->getClientOriginalName();
+        $photos = [$request->files->get('file1'),$request->files->get('file2'),$request->files->get('file3')];
+        $photosNames = [];
+        foreach($photos as $photo) {
+            if($photo) {
+                $newPhoto = $photo;
+                $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
+                $originalPhotoName = $newPhoto->getClientOriginalName();
 
-        $baseFileName = pathinfo($originalPhotoName, PATHINFO_FILENAME);
-        $photoName = Urlizer::urlize($baseFileName) . '-' . uniqid() . '.' . $newPhoto->guessExtension();
+                $baseFileName = pathinfo($originalPhotoName, PATHINFO_FILENAME);
+                $photoName = Urlizer::urlize($baseFileName) . '-' . uniqid() . '.' . $newPhoto->guessExtension();
 
-        $newPhoto->move($destination, $photoName);
-        $newAnnonce->setPhotos([$photoName]);
-
+                $newPhoto->move($destination, $photoName);
+                $photosNames[] = $photoName;
+            }
+        }
+        $newAnnonce->setPhotos($photosNames);
 
         $entityManager->persist($newAnnonce);
         $entityManager->flush();

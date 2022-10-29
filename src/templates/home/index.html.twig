@@ -3,7 +3,8 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="/style/homeStyle.css">
+    <link rel="stylesheet" href="{{ asset("/style/annonceStyle.css") }}">
+    <link rel="stylesheet" href="{{ asset("/style/homeStyle.css") }}">
 {% endblock %}
 
 {% block banner %}
@@ -19,6 +20,40 @@
             <div class="banner_image" style="background-image: url('https://www.carrelage-bordeaux.com/wp-content/uploads/2021/04/amb-good-vives-03.jpg')"></div>
         </div>
     </div>
-    <div>
+{% endblock %}
+
+{% block main %}
+{% for message in app.flashes('success') %}
+    <p class="message_authentify">{{ message }}</p>
+{% endfor %}
+
+<div>
+    <div class="annonces_container">
+        {% for annonce in annonces %}
+            <div class="annonce_card">
+                <div class="img_annonce"
+                     style="background-image: url({{ annonce.photos ? '/uploads/' ~ annonce.photos[0] : 'https://images.caradisiac.com/logos/3/7/7/6/273776/S7-essai-moto-guzzi-v100-s-la-jeunesse-centenaire-198620.jpg' }})"></div>
+                <div class="annonce_card_infos">
+                    <h2>{{ annonce.title }}</h2>
+                    <div class="annonce_card_categorie">
+                        {% for categorie in annonce.categories %}
+                            <a href="{{ path("app_annonce_from_tag", { tag: categorie.name }) }}"><span>| {{ categorie.name }} |</span></a>
+                        {% endfor %}
+                    </div>
+                    <div class="annonce_card_infos_plus">
+                        <div>
+                            <p>{{ annonce.price}} €</p>
+                            <a href="{{ path("app_user_id",{ id: annonce.author.id}) }}">{{ annonce.author.name }}</a>
+                            <p class="annonce_card_createdat">Publié le: {{ annonce.createdAt|date('Y-m-d') }}</p>
+                        </div>
+                        <div>
+                            <a class="buttonHover" href="{{ path("app_annonce_id",{ id: annonce.id}) }}">Voir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
     </div>
+</div>
 {% endblock %}

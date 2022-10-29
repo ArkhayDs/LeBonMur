@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Repository\AnnonceRepository;
 use App\Security\LoginAuthenticator;
 use App\Service\DemoService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,12 +23,14 @@ class BaseController extends AbstractController
      * @return Response
      */
     #[Route('/',name:'app_index')]
-    public function index() : Response
+    public function index(AnnonceRepository $annonceRepository) : Response
     {
         $utilisateur = $this->getUser();
+        $annonces = $annonceRepository->findAllAndJoin();
 
         return $this->render('home/index.html.twig', [
-            "utilisateur" => $utilisateur
+            "utilisateur" => $utilisateur,
+            "annonces" => $annonces
         ]);
     }
 

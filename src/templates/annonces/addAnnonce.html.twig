@@ -2,22 +2,41 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="/style/addAnnonceStyle.css">
+    <link rel="stylesheet" href="{{ asset("/style/addAnnonceStyle.css") }}">
+{% endblock %}
+
+{#
+Coucou JF, il est minuit et flemme de faire un dossier à part ok !
+Je suis pas venu ici pour souffrir ok !
+#}
+{% block javascripts %}
+<script>
+    function showPreview(input, id){
+        console.log(input.files[0]);
+        if(input.files.length > 0){
+            var src = URL.createObjectURL(input.files[0]);
+            console.log(src)
+            var preview = document.getElementById("file-ip-"+id+"-preview");
+            preview.src = src;
+            preview.style.display = "block";
+        }
+    }
+</script>
 {% endblock %}
 
 {% block main %}
     <form class="form_add_annonce" action="{{ path('app_annonce_add_form') }}" method="post"
     enctype="multipart/form-data">
         <div class="input_container">
-            <input type="text" id="titre" name="title" class="input_input" placeholder=" ">
+            <input type="text" id="titre" name="title" class="input_input" placeholder=" " required>
             <label for="titre"  class="input_label">Titre</label>
         </div>
         <div class="input_container">
-            <input type="text" id="description" name="description" class="input_input" placeholder=" ">
+            <input type="text" id="description" name="description" class="input_input" placeholder=" " required>
             <label for="description"  class="input_label">Description</label>
         </div>
         <div class="input_container">
-            <input type="number" id="prix" name="price" class="input_input" placeholder=" ">
+            <input type="number" id="prix" name="price" class="input_input" placeholder=" " required>
             <label for="prix"  class="input_label">Prix</label>
         </div>
         <div class="input_container">
@@ -27,9 +46,28 @@
                 <label for="{{ categorie.name }}">{{ categorie.name }}</label>
             {% endfor %}
         </div>
-        <div class="input_container file_contaienr">
-            <input type="file" name="photo" id="file"  />
-            <label class="buttonCharge" for="file"><p class="buttonChargeText">Choisis des photos</p></label>
+        <div class="files_contaiener">
+            <div>
+                <div class="preview">
+                    <img id="file-ip-1-preview" src="https://yama-mac.com/wp-content/uploads/2021/10/screenshot_icon_px1024x1024.png">
+                </div>
+                <input type="file" name="file1" id="file1" class="inputfile" onchange="showPreview(this, 1);" required/>
+                <label class="buttonCharge" for="file1"><p class="buttonChargeText">Choisis des photos</p></label>
+            </div>
+            <div>
+                <div class="preview">
+                    <img id="file-ip-2-preview" src="https://yama-mac.com/wp-content/uploads/2021/10/screenshot_icon_px1024x1024.png">
+                </div>
+                <input type="file" name="file2" id="file2" class="inputfile" onchange="showPreview(this, 2);"/>
+                <label class="buttonCharge" for="file2"><p class="buttonChargeText">Choisis des photos</p></label>
+            </div>
+            <div>
+                <div class="preview">
+                    <img id="file-ip-3-preview" src="https://yama-mac.com/wp-content/uploads/2021/10/screenshot_icon_px1024x1024.png">
+                </div>
+                <input type="file" name="file3" id="file3" class="inputfile" onchange="showPreview(this, 3);"/>
+                <label class="buttonCharge" for="file3"><p class="buttonChargeText">Choisis des photos</p></label>
+            </div>
         </div>
         <input class="buttonHover" type="submit" value="Publier votre annonce"/>
     </form>

@@ -12,12 +12,13 @@
             {% for photo in annonce.photos %}
                 <div class="first_image">
                     <figure>
-                        <img src="{{ annonce.photos ? '/uploads/' ~ annonce.photos[0] : 'https://images.caradisiac.com/logos/3/7/7/6/273776/S7-essai-moto-guzzi-v100-s-la-jeunesse-centenaire-198620.jpg' }}"></img>
+                        <img src="{{ annonce.photos ? '/uploads/' ~ photo : 'https://images.caradisiac.com/logos/3/7/7/6/273776/S7-essai-moto-guzzi-v100-s-la-jeunesse-centenaire-198620.jpg' }}"></img>
                     </figure>
                 </div>
             {% endfor %}
             {% if annonce.photos|length == 0 %}
                 <div class="first_image">
+                    <p>{{ annonce.photos }}</p>
                     <figure>
                         <img src="{{ annonce.photos ? '/uploads/' ~ annonce.photos[0] : 'https://images.caradisiac.com/logos/3/7/7/6/273776/S7-essai-moto-guzzi-v100-s-la-jeunesse-centenaire-198620.jpg' }}"></img>
                     </figure>
